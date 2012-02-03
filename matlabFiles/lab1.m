@@ -3,6 +3,7 @@ close all; clear; clc;
 % constants
 unitContourSize = 1000;
 gridSize = 0.05;
+gridSize = 0.5;
 
 % Cluster data
 N_A = 200;
@@ -28,21 +29,21 @@ Sigma_E = [10 -5; -5 20];
 %===============================================================================
 
 % create clusters
-A = gausTransform(randn(N_A,2),mu_A,Sigma_A);
-B = gausTransform(randn(N_B,2),mu_B,Sigma_B);
-C = gausTransform(randn(N_C,2),mu_C,Sigma_C);
-D = gausTransform(randn(N_D,2),mu_D,Sigma_D);
-E = gausTransform(randn(N_E,2),mu_E,Sigma_E);
+A = gaussTransform(randn(N_A,2),mu_A,Sigma_A);
+B = gaussTransform(randn(N_B,2),mu_B,Sigma_B);
+C = gaussTransform(randn(N_C,2),mu_C,Sigma_C);
+D = gaussTransform(randn(N_D,2),mu_D,Sigma_D);
+E = gaussTransform(randn(N_E,2),mu_E,Sigma_E);
 
 % create generic unit contour (i.e. a circle)
 unitContour = [cos((1:unitContourSize)/unitContourSize*2*pi());sin((1:unitContourSize)/unitContourSize*2*pi())]';
 
 % transform unit contour for each class
-A_unitContour = gausTransform(unitContour,mu_A,Sigma_A);
-B_unitContour = gausTransform(unitContour,mu_B,Sigma_B);
-C_unitContour = gausTransform(unitContour,mu_C,Sigma_C);
-D_unitContour = gausTransform(unitContour,mu_D,Sigma_D);
-E_unitContour = gausTransform(unitContour,mu_E,Sigma_E);
+A_unitContour = gaussTransform(unitContour,mu_A,Sigma_A);
+B_unitContour = gaussTransform(unitContour,mu_B,Sigma_B);
+C_unitContour = gaussTransform(unitContour,mu_C,Sigma_C);
+D_unitContour = gaussTransform(unitContour,mu_D,Sigma_D);
+E_unitContour = gaussTransform(unitContour,mu_E,Sigma_E);
 
 % Case 1 plot
 fig1 = figure; hold on;
@@ -109,10 +110,10 @@ for i = 1:size(MEDGrid2,1)
 end
 
 figure(fig1);
-contour(xAxis1,yAxis1,MEDGrid1,1);
+contour(xAxis1,yAxis1,MEDGrid1,1, '-k');
 
 figure(fig2);
-contour(xAxis2,yAxis2,MEDGrid2,2);
+contour(xAxis2,yAxis2,MEDGrid2,2, '-k');
 
 % GED
 figure(fig1);
