@@ -50,6 +50,7 @@ plot (A(:,1), A(:,2), 'r.');
 plot (B(:,1), B(:,2), 'g.');
 plot (A_unitContour(:,1), A_unitContour(:,2), 'r-');
 plot (B_unitContour(:,1), B_unitContour(:,2), 'g-');
+axis equal;
 
 % Case 2 plot
 fig2 = figure; hold on;
@@ -59,6 +60,7 @@ plot (E(:,1), E(:,2), 'b.');
 plot (C_unitContour(:,1), C_unitContour(:,2), 'r-');
 plot (D_unitContour(:,1), D_unitContour(:,2), 'g-');
 plot (E_unitContour(:,1), E_unitContour(:,2), 'b-');
+axis equal;
 
 %===============================================================================
 % 3. CLASSIFIERS
