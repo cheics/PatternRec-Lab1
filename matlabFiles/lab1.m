@@ -3,7 +3,7 @@ close all; clear; clc;
 % constants
 unitContourSize = 1000;
 gridSize = 0.05;
-gridSize = 0.5;
+% gridSize = 0.5;
 
 % Cluster data
 N_A = 200;
@@ -25,7 +25,7 @@ Sigma_D = [ 8  0;  0  8];
 Sigma_E = [10 -5; -5 20];
 
 %===============================================================================
-% 2. GENERATING CLUSTERS
+%% 2. GENERATING CLUSTERS
 %===============================================================================
 
 % create clusters
@@ -63,68 +63,102 @@ plot (D_unitContour(:,1), D_unitContour(:,2), 'g-');
 plot (E_unitContour(:,1), E_unitContour(:,2), 'b-');
 axis equal;
 
-%===============================================================================
-% 3. CLASSIFIERS
-%===============================================================================
+% ===============================================================================
+%% 3. CLASSIFIERS
+% ===============================================================================
 % Grid prep
-xMin1 = floor(min([A(:,1);B(:,1)])/5)*5;
-xMax1 =  ceil(max([A(:,1);B(:,1)])/5)*5;
-yMin1 = floor(min([A(:,2);B(:,2)])/5)*5;
-yMax1 =  ceil(max([A(:,2);B(:,2)])/5)*5;
-xAxis1 = xMin1:gridSize:xMax1;
-yAxis1 = yMin1:gridSize:yMax1;
-blankGrid1 = zeros(length(yAxis1),length(xAxis1));
+[xVals_AB, yVals_AB, MED_AB] = gridPrep(gridSize, A, B);
+[xVals_CDE, yVals_CDE, MED_CDE] = gridPrep(gridSize, C, D, E);
 
-xMin2 = floor(min([C(:,1);D(:,1);E(:,1)])/5)*5;
-xMax2 =  ceil(max([C(:,1);D(:,1);E(:,1)])/5)*5;
-yMin2 = floor(min([C(:,2);D(:,2);E(:,2)])/5)*5;
-yMax2 =  ceil(max([C(:,2);D(:,2);E(:,2)])/5)*5;
-xAxis2 = xMin2:gridSize:xMax2;
-yAxis2 = yMin2:gridSize:yMax2;
-blankGrid2 = zeros(length(yAxis2),length(xAxis2));
-
-mu_A_index = [find(mu_A(2) == yAxis1) find(mu_A(1) == xAxis1)];
-mu_B_index = [find(mu_B(2) == yAxis1) find(mu_B(1) == xAxis1)];
-mu_C_index = [find(mu_C(2) == yAxis2) find(mu_C(1) == xAxis2)];
-mu_D_index = [find(mu_D(2) == yAxis2) find(mu_D(1) == xAxis2)];
-mu_E_index = [find(mu_E(2) == yAxis2) find(mu_E(1) == xAxis2)];
-
-% MED
-MEDGrid1 = blankGrid1;
-for i = 1:size(MEDGrid1,1)
-  for j = 1:size(MEDGrid1,2)
-    [value, index] = min([-mu_A_index*[i j]'+0.5*mu_A_index*mu_A_index';
-                          -mu_B_index*[i j]'+0.5*mu_B_index*mu_B_index']);
-    MEDGrid1(i,j) = index-1;
-  end
+xyGrid_AB=zeros(size(MED_AB,1), size(MED_AB,2), 2);
+for j = 1:size(MED_AB,1)
+	for i = 1:size(MED_AB,2)
+		xyGrid_AB(j, i, :) = [xVals_AB(i), yVals_AB(j)];
+	end
 end
+xyGrid_list_AB=reshape(xyGrid_AB,size(MED_AB,1)*size(MED_AB,2),2);
 
-MEDGrid2 = blankGrid2;
-for i = 1:size(MEDGrid2,1)
-  for j = 1:size(MEDGrid2,2)
-    [value, index] = min([-mu_C_index*[i j]'+0.5*mu_C_index*mu_C_index';
-                          -mu_D_index*[i j]'+0.5*mu_D_index*mu_D_index';
-                          -mu_E_index*[i j]'+0.5*mu_E_index*mu_E_index']);
-    MEDGrid2(i,j) = index-1;
-  end
+xyGrid_CDE=zeros(size(MED_CDE,1), size(MED_CDE,2), 2);
+for j = 1:size(MED_CDE,1)
+	for i = 1:size(MED_CDE,2)
+		xyGrid_CDE(j, i, :) = [xVals_CDE(i), yVals_CDE(j)];
+	end
 end
+xyGrid_list_CDE=reshape(xyGrid_CDE,size(MED_CDE,1)*size(MED_CDE,2),2);
 
-figure(fig1);
-contour(xAxis1,yAxis1,MEDGrid1,1, '-k');
 
-figure(fig2);
-contour(xAxis2,yAxis2,MEDGrid2,2, '-k');
+%% 3.1 MED Class
+% % MED_AB
+% for i = 1:size(MED_AB,1)
+%   for j = 1:size(MED_AB,2)
+% 		MED_AB(i,j)= MED_Class([xVals_AB(j), yVals_AB(i)], ...
+% 			mu_A, mu_B);
+%   end
+% end
+% 
+% % MED_CDE
+% for i = 1:size(MED_CDE,1)
+%   for j = 1:size(MED_CDE,2)
+% 		MED_CDE(i,j)= MED_Class([xVals_CDE(j), yVals_CDE(i)], ...
+% 			mu_C, mu_D, mu_E);
+%   end
+% end
 
-% GED
-figure(fig1);
+% figure(fig1);
+% contour(xVals_AB,yVals_AB,MED_AB,1, '-k');
+% figure(fig2);
+% contour(xVals_CDE,yVals_CDE,MED_CDE,2, '-k');
 
-figure(fig2);
-% MAP
-figure(fig1);
+%% 3.2 NN Class
+% % NN_AB
+% NN_class_AB=knnclassify(xyGrid_list_AB, ...
+% 	vertcat(A, B), ...
+% 	vertcat(ones(length(A),1), ones(length(B),1).*2) ...
+% );
+% NN_class_AB=reshape(NN_class_AB,size(MED_AB,1),size(MED_AB,2));
+% 
+% % NN_CDE
+% NN_class_CDE=knnclassify(xyGrid_list_CDE, ...
+% 	vertcat(C, D, E), ...
+% 	vertcat(ones(length(C),1), ones(length(D),1).*2, ones(length(E),1).*3), ...
+% );
+% NN_class_CDE=reshape(NN_class_CDE,size(MED_CDE,1),size(MED_CDE,2));
+% 
+% figure(fig1);
+% contour(xVals_AB,yVals_AB,NN_class_AB,1, '-k');
+% figure(fig2);
+% contour(xVals_CDE,yVals_CDE,NN_class_CDE,2, '-k');
 
-figure(fig2);
-% NN
-figure(fig1);
+%% 3.3 5NN Class
+% % NN5_AB
+% NN5_class_AB=knnclassify(xyGrid_list_AB, ...
+% 	vertcat(A, B), ...
+% 	vertcat(ones(length(A),1), ones(length(B),1).*2), ...
+% 	5 ...
+% );
+% NN5_class_AB=reshape(NN5_class_AB,size(MED_AB,1),size(MED_AB,2));
+% 
+% % NN5_CDE
+% NN5_class_CDE=knnclassify(xyGrid_list_CDE, ...
+% 	vertcat(C, D, E), ...
+% 	vertcat(ones(length(C),1), ones(length(D),1).*2, ones(length(E),1).*3), ...
+% 	5 ...
+% );
+% NN5_class_CDE=reshape(NN5_class_CDE,size(MED_CDE,1),size(MED_CDE,2));
+% 
+% figure(fig1);
+% contour(xVals_AB,yVals_AB,NN5_class_AB);
+% figure(fig2);
+% contour(xVals_CDE,yVals_CDE,NN5_class_CDE);
 
-figure(fig2);
+
+% 
+% % GED
+% figure(fig1);
+% 
+% figure(fig2);
+% % MAP
+% figure(fig1);
+% 
+% figure(fig2);
 
