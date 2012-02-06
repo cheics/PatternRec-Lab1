@@ -3,8 +3,9 @@ close all; clear; clc;
 % constants
 unitContourSize = 10000;
 gridSize = 0.05;
-% gridSize = 0.5;
+gridSize = 0.5;
 fontSize = 10;
+shadeVal=0.04;
 
 % Cluster data
 N_A = 200;
@@ -111,21 +112,14 @@ xyGrid_list_CDE=reshape(xyGrid_CDE,size(MED_CDE,1)*size(MED_CDE,2),2);
 %   end
 % end
 
-% MED_CDE
-for i = 1:size(MED_CDE,1)
-  for j = 1:size(MED_CDE,2)
-		MED_CDE(i,j)= MED_Class([xVals_CDE(j), yVals_CDE(i)], ...
-			mu_C, mu_D, mu_E);
-  end
-end
 
-figure(fig1);
-[c,h] =contourf(xVals_AB,yVals_AB,MED_AB,1);
-ch = get(h,'child'); alpha(ch,shadeVal);
-
-figure(fig2);
-[c,h] =contourf(xVals_CDE,yVals_CDE,MED_CDE,2);
-ch = get(h,'child'); alpha(ch,shadeVal);
+% figure(fig1);
+% [c,h] =contourf(xVals_AB,yVals_AB,MED_AB,1);
+% ch = get(h,'child'); alpha(ch,shadeVal);
+% 
+% figure(fig2);
+% [c,h] =contourf(xVals_CDE,yVals_CDE,MED_CDE,2);
+% ch = get(h,'child'); alpha(ch,shadeVal);
 
 %% 3.2 NN Class
 %% NN_AB
@@ -149,29 +143,29 @@ ch = get(h,'child'); alpha(ch,shadeVal);
 % [c,h]=contourf(xVals_CDE,yVals_CDE,NN_class_CDE,2);
 % ch = get(h,'child'); alpha(ch,shadeVal);
 
-% 3.3 5NN Class
-% NN5_AB
-NN5_class_AB=knnclassify(xyGrid_list_AB, ...
-	vertcat(A, B), ...
-	vertcat(ones(length(A),1), ones(length(B),1).*2), ...
-	5 ...
-);
-NN5_class_AB=reshape(NN5_class_AB,size(MED_AB,1),size(MED_AB,2));
-
-% NN5_CDE
-NN5_class_CDE=knnclassify(xyGrid_list_CDE, ...
-	vertcat(C, D, E), ...
-	vertcat(ones(length(C),1), ones(length(D),1).*2, ones(length(E),1).*3), ...
-	5 ...
-);
-NN5_class_CDE=reshape(NN5_class_CDE,size(MED_CDE,1),size(MED_CDE,2));
-
-figure(fig1);
-[c,h] =contourf(xVals_AB,yVals_AB,NN5_class_AB);
-ch = get(h,'child'); alpha(ch,shadeVal);
-figure(fig2);
-[c,h] =contourf(xVals_CDE,yVals_CDE,NN5_class_CDE);
-ch = get(h,'child'); alpha(ch,shadeVal);
+% % 3.3 5NN Class
+% % NN5_AB
+% NN5_class_AB=knnclassify(xyGrid_list_AB, ...
+% 	vertcat(A, B), ...
+% 	vertcat(ones(length(A),1), ones(length(B),1).*2), ...
+% 	5 ...
+% );
+% NN5_class_AB=reshape(NN5_class_AB,size(MED_AB,1),size(MED_AB,2));
+% 
+% % NN5_CDE
+% NN5_class_CDE=knnclassify(xyGrid_list_CDE, ...
+% 	vertcat(C, D, E), ...
+% 	vertcat(ones(length(C),1), ones(length(D),1).*2, ones(length(E),1).*3), ...
+% 	5 ...
+% );
+% NN5_class_CDE=reshape(NN5_class_CDE,size(MED_CDE,1),size(MED_CDE,2));
+% 
+% figure(fig1);
+% [c,h] =contourf(xVals_AB,yVals_AB,NN5_class_AB);
+% ch = get(h,'child'); alpha(ch,shadeVal);
+% figure(fig2);
+% [c,h] =contourf(xVals_CDE,yVals_CDE,NN5_class_CDE);
+% ch = get(h,'child'); alpha(ch,shadeVal);
 
 % 
 % % GED
@@ -179,28 +173,28 @@ ch = get(h,'child'); alpha(ch,shadeVal);
 % 
 % figure(fig2);
 
-% %%  3.7 MAP Class
-% % % MAP_AB
-% for i = 1:size(MED_AB,1)
-%   for j = 1:size(MED_AB,2)
-% 	MED_AB(i,j)=MAP_class2([xVals_AB(j), yVals_AB(i)], ...
-% 		mu_A,Sigma_A,N_A,mu_B,Sigma_B,N_B);
-%   end
-% end
-% figure(fig1);
-% [c,h] =contourf(xVals_AB,yVals_AB,MED_AB);
-% ch = get(h,'child'); alpha(ch,shadeVal);
-% 
-% % MAP_CDE
-% for i = 1:size(MED_CDE,1)
-%   for j = 1:size(MED_CDE,2)
-% 	MED_CDE(i,j)=MAP_class3([xVals_CDE(j), yVals_CDE(i)], ...
-% 		mu_A,Sigma_A,N_A,mu_B,Sigma_B,N_B,mu_C,Sigma_C,N_C);
-%   end
-% end
-% figure(fig2);
-% [c,h] =contourf(xVals_CDE,yVals_CDE,MED_CDE);
-% ch = get(h,'child'); alpha(ch,shadeVal);
+%%  3.7 MAP Class
+% % MAP_AB
+for i = 1:size(MED_AB,1)
+  for j = 1:size(MED_AB,2)
+	MED_AB(i,j)=MAP_class2([xVals_AB(j), yVals_AB(i)], ...
+		mu_A,Sigma_A,N_A,mu_B,Sigma_B,N_B);
+  end
+end
+figure(fig1);
+[c,h] =contourf(xVals_AB,yVals_AB,MED_AB);
+ch = get(h,'child'); alpha(ch,shadeVal);
+
+% MAP_CDE
+for i = 1:size(MED_CDE,1)
+  for j = 1:size(MED_CDE,2)
+	MED_CDE(i,j)=MAP_class3([xVals_CDE(j), yVals_CDE(i)], ...
+		mu_C,Sigma_C,N_C,mu_D,Sigma_D,N_D,mu_E,Sigma_E,N_E);
+  end
+end
+figure(fig2);
+[c,h] =contourf(xVals_CDE,yVals_CDE,MED_CDE);
+ch = get(h,'child'); alpha(ch,shadeVal);
 
 
 

@@ -3,33 +3,33 @@ function [classNumber] = MAP_class3(dataPoint, ...
 								meanB,covarB,n_B, ...
 								meanC,covarC,n_C)
 
-	function dist = getDist(dataPoint_t, mean_x,covar_x)
-		dist= transpose(dataPoint_t'-mean_x')*inv(covar_x)*(dataPoint_t'-mean_x');
+	function theDist = getDist(test_p, mu_test, covar_test)
+		theDist=(transpose(test_p'-mu_test')) ...
+					*(inv(covar_test)) ...
+					*(test_p'-mu_test');
+	end
+
+	comparePairs=[0 0 0];
+	if getDist(dataPoint,meanB,covarB)-getDist(dataPoint,meanA,covarA) ...
+			>2*log(n_B/n_A) + log(det(covarA)/det(covarB))
+		comparePairs(1)=1;
+	end
+	if getDist(dataPoint,meanB,covarB)-getDist(dataPoint,meanC,covarC) ...
+			>2*log(n_B/n_C) + log(det(covarC)/det(covarB))
+		comparePairs(2)=1;
+	end
+	if getDist(dataPoint,meanC,covarC)-getDist(dataPoint,meanA,covarA) ...
+			>2*log(n_C/n_A) + log(det(covarA)/det(covarC))
+		comparePairs(3)=1;
 	end
 	
-	decisionAB=getDist(dataPoint, meanB,covarB) ...
-		-getDist(dataPoint, meanA,covarA) ...
-		-2*log(n_B/n_A) ...
-		-log(det(covarA)/det(covarB));
-	decisionBC=getDist(dataPoint, meanC,covarC) ...
-		-getDist(dataPoint, meanB,covarB) ...
-		-2*log(n_C/n_B) ...
-		-log(det(covarB)/det(covarC));
-	
-	decisionCA=getDist(dataPoint, meanA,covarA) ...
-		-getDist(dataPoint, meanC,covarC) ...
-		-2*log(n_A/n_C) ...
-		-log(det(covarC)/det(covarA));
-	
-	if (decisionAB > 0) && (decisionCA < 0)
+	if comparePairs(1)==1 && comparePairs(3)==1
 		classNumber=1;
-	elseif (decisionBC > 0) && (decisionAB < 0)
+	elseif comparePairs(1)==0 && comparePairs(2)==0
 		classNumber=2;
-	elseif (decisionCA > 0) && (decisionBC < 0)
+	elseif comparePairs(2)==1 && comparePairs(3)==0
 		classNumber=3;
 	else
-		classNumber=-1; % WTF?
+		classNumber=-1
 	end
-
-
 end
