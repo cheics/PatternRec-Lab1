@@ -4,8 +4,12 @@ close all; clear; clc;
 unitContourSize = 10000;
 gridSize = 0.05;
 % gridSize = 0.5;
+<<<<<<< HEAD
 % gridSize = 0.3;
 shadeVal=0.08;
+=======
+fontSize = 10;
+>>>>>>> a3cf086da913a472e73e3711b8952d093f91c097
 
 % Cluster data
 N_A = 200;
@@ -48,15 +52,18 @@ D_unitContour = gaussTransform(unitContour,mu_D,Sigma_D);
 E_unitContour = gaussTransform(unitContour,mu_E,Sigma_E);
 
 % Case 1 plot
-fig1 = figure; hold on;
+fig1 = figure('paperposition', [0 0 6 4]); hold on;
 plot (A(:,1), A(:,2), 'r.');
 plot (B(:,1), B(:,2), 'g.');
 plot (A_unitContour(:,1), A_unitContour(:,2), 'r-');
 plot (B_unitContour(:,1), B_unitContour(:,2), 'g-');
 axis equal;
+xlabel('Feature 1', 'fontsize', fontSize);
+ylabel('Feature 2', 'fontsize', fontSize);
+print -dpng -r300 'fig2_1-AB_cluster'
 
 % Case 2 plot
-fig2 = figure; hold on;
+fig2 = figure('paperposition', [0 0 6 4]); hold on;
 plot (C(:,1), C(:,2), 'r.');
 plot (D(:,1), D(:,2), 'g.');
 plot (E(:,1), E(:,2), 'b.');
@@ -64,6 +71,9 @@ plot (C_unitContour(:,1), C_unitContour(:,2), 'r-');
 plot (D_unitContour(:,1), D_unitContour(:,2), 'g-');
 plot (E_unitContour(:,1), E_unitContour(:,2), 'b-');
 axis equal;
+xlabel('Feature 1', 'fontsize', fontSize);
+ylabel('Feature 2', 'fontsize', fontSize);
+print -dpng -r300 'fig2_2-CDE_cluster'
 
 % ===============================================================================
 %% 3. CLASSIFIERS
@@ -89,6 +99,7 @@ for j = 1:size(MED_CDE,1)
 end
 xyGrid_list_CDE=reshape(xyGrid_CDE,size(MED_CDE,1)*size(MED_CDE,2),2);
 
+<<<<<<< HEAD
 
 % 3.1 MED Class
 % MED_AB
@@ -98,6 +109,24 @@ for i = 1:size(MED_AB,1)
 			mu_A, mu_B);
   end
 end
+=======
+%% 3.1 MED Class
+% % MED_AB
+% for i = 1:size(MED_AB,1)
+%   for j = 1:size(MED_AB,2)
+% 		MED_AB(i,j)= MED_Class([xVals_AB(j), yVals_AB(i)], ...
+% 			mu_A, mu_B);
+%   end
+% end
+% 
+% % MED_CDE
+% for i = 1:size(MED_CDE,1)
+%   for j = 1:size(MED_CDE,2)
+% 		MED_CDE(i,j)= MED_Class([xVals_CDE(j), yVals_CDE(i)], ...
+% 			mu_C, mu_D, mu_E);
+%   end
+% end
+>>>>>>> a3cf086da913a472e73e3711b8952d093f91c097
 
 % MED_CDE
 for i = 1:size(MED_CDE,1)
