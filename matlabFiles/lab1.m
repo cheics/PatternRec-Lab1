@@ -4,12 +4,7 @@ close all; clear; clc;
 unitContourSize = 10000;
 gridSize = 0.05;
 % gridSize = 0.5;
-<<<<<<< HEAD
-% gridSize = 0.3;
-shadeVal=0.08;
-=======
 fontSize = 10;
->>>>>>> a3cf086da913a472e73e3711b8952d093f91c097
 
 % Cluster data
 N_A = 200;
@@ -99,17 +94,6 @@ for j = 1:size(MED_CDE,1)
 end
 xyGrid_list_CDE=reshape(xyGrid_CDE,size(MED_CDE,1)*size(MED_CDE,2),2);
 
-<<<<<<< HEAD
-
-% 3.1 MED Class
-% MED_AB
-for i = 1:size(MED_AB,1)
-  for j = 1:size(MED_AB,2)
-		MED_AB(i,j)= MED_Class([xVals_AB(j), yVals_AB(i)], ...
-			mu_A, mu_B);
-  end
-end
-=======
 %% 3.1 MED Class
 % % MED_AB
 % for i = 1:size(MED_AB,1)
@@ -126,7 +110,6 @@ end
 % 			mu_C, mu_D, mu_E);
 %   end
 % end
->>>>>>> a3cf086da913a472e73e3711b8952d093f91c097
 
 % MED_CDE
 for i = 1:size(MED_CDE,1)
