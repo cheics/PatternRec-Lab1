@@ -95,33 +95,80 @@ for j = 1:size(MED_CDE,1)
 end
 xyGrid_list_CDE=reshape(xyGrid_CDE,size(MED_CDE,1)*size(MED_CDE,2),2);
 
-%% 3.1 MED Class
-% % MED_AB
+% 3.1 MED Class
+% MED_AB
+for i = 1:size(MED_AB,1)
+  for j = 1:size(MED_AB,2)
+		MED_AB(i,j)= MED_Class([xVals_AB(j), yVals_AB(i)], ...
+			mu_A, mu_B);
+  end
+end
+
+% MED_CDE
+for i = 1:size(MED_CDE,1)
+  for j = 1:size(MED_CDE,2)
+		MED_CDE(i,j)= MED_Class([xVals_CDE(j), yVals_CDE(i)], ...
+			mu_C, mu_D, mu_E);
+  end
+end
+
+figure(fig1);
+[c,h] =contourf(xVals_AB,yVals_AB,MED_AB,1);
+ch = get(h,'child'); alpha(ch,shadeVal);
+
+figure(fig2);
+[c,h] =contourf(xVals_CDE,yVals_CDE,MED_CDE,2);
+ch = get(h,'child'); alpha(ch,shadeVal);
+
+% 3.2 GED Class
+% GED_AB
+for i = 1:size(MED_AB,1)
+  for j = 1:size(MED_AB,2)
+		MED_AB(i,j)=GED_Class2([xVals_AB(j), yVals_AB(i)],mu_A,Sigma_A,...
+            N_A,mu_B,Sigma_B,N_B);
+  end
+end
+
+% GED_CDE
+for i = 1:size(MED_CDE,1)
+  for j = 1:size(MED_CDE,2)
+		MED_CDE(i,j)=GED_Class3([xVals_CDE(j), yVals_CDE(i)],...
+            mu_C,Sigma_C,N_C,mu_D,Sigma_D,N_D,mu_E,Sigma_E,N_E);
+  end
+end
+ 
+figure(fig1);
+[c,h] =contourf(xVals_AB,yVals_AB,MED_AB,1);
+ch = get(h,'child'); alpha(ch,shadeVal);
+ 
+figure(fig2);
+[c,h] =contourf(xVals_CDE,yVals_CDE,MED_CDE,2);
+ch = get(h,'child'); alpha(ch,shadeVal);
+
+% %  3.3 MAP Class
+% % MAP_AB
 % for i = 1:size(MED_AB,1)
 %   for j = 1:size(MED_AB,2)
-% 		MED_AB(i,j)= MED_Class([xVals_AB(j), yVals_AB(i)], ...
-% 			mu_A, mu_B);
+% 	MED_AB(i,j)=MAP_class2([xVals_AB(j), yVals_AB(i)], ...
+% 		mu_A,Sigma_A,N_A,mu_B,Sigma_B,N_B);
 %   end
 % end
+% figure(fig1);
+% [c,h] =contourf(xVals_AB,yVals_AB,MED_AB);
+% ch = get(h,'child'); alpha(ch,shadeVal);
 % 
-% % MED_CDE
+% % MAP_CDE
 % for i = 1:size(MED_CDE,1)
 %   for j = 1:size(MED_CDE,2)
-% 		MED_CDE(i,j)= MED_Class([xVals_CDE(j), yVals_CDE(i)], ...
-% 			mu_C, mu_D, mu_E);
+% 	MED_CDE(i,j)=MAP_class3([xVals_CDE(j), yVals_CDE(i)], ...
+% 		mu_C,Sigma_C,N_C,mu_D,Sigma_D,N_D,mu_E,Sigma_E,N_E);
 %   end
 % end
-
-
-% figure(fig1);
-% [c,h] =contourf(xVals_AB,yVals_AB,MED_AB,1);
-% ch = get(h,'child'); alpha(ch,shadeVal);
-% 
 % figure(fig2);
-% [c,h] =contourf(xVals_CDE,yVals_CDE,MED_CDE,2);
+% [c,h] =contourf(xVals_CDE,yVals_CDE,MED_CDE);
 % ch = get(h,'child'); alpha(ch,shadeVal);
 
-%% 3.2 NN Class
+%% 3.4 NN Class
 %% NN_AB
 % NN_class_AB=knnclassify(xyGrid_list_AB, ...
 % 	vertcat(A, B), ...
@@ -143,7 +190,7 @@ xyGrid_list_CDE=reshape(xyGrid_CDE,size(MED_CDE,1)*size(MED_CDE,2),2);
 % [c,h]=contourf(xVals_CDE,yVals_CDE,NN_class_CDE,2);
 % ch = get(h,'child'); alpha(ch,shadeVal);
 
-% % 3.3 5NN Class
+% % 3.5 5NN Class
 % % NN5_AB
 % NN5_class_AB=knnclassify(xyGrid_list_AB, ...
 % 	vertcat(A, B), ...
@@ -166,35 +213,3 @@ xyGrid_list_CDE=reshape(xyGrid_CDE,size(MED_CDE,1)*size(MED_CDE,2),2);
 % figure(fig2);
 % [c,h] =contourf(xVals_CDE,yVals_CDE,NN5_class_CDE);
 % ch = get(h,'child'); alpha(ch,shadeVal);
-
-% 
-% % GED
-% figure(fig1);
-% 
-% figure(fig2);
-
-%%  3.7 MAP Class
-% % MAP_AB
-for i = 1:size(MED_AB,1)
-  for j = 1:size(MED_AB,2)
-	MED_AB(i,j)=MAP_class2([xVals_AB(j), yVals_AB(i)], ...
-		mu_A,Sigma_A,N_A,mu_B,Sigma_B,N_B);
-  end
-end
-figure(fig1);
-[c,h] =contourf(xVals_AB,yVals_AB,MED_AB);
-ch = get(h,'child'); alpha(ch,shadeVal);
-
-% MAP_CDE
-for i = 1:size(MED_CDE,1)
-  for j = 1:size(MED_CDE,2)
-	MED_CDE(i,j)=MAP_class3([xVals_CDE(j), yVals_CDE(i)], ...
-		mu_C,Sigma_C,N_C,mu_D,Sigma_D,N_D,mu_E,Sigma_E,N_E);
-  end
-end
-figure(fig2);
-[c,h] =contourf(xVals_CDE,yVals_CDE,MED_CDE);
-ch = get(h,'child'); alpha(ch,shadeVal);
-
-
-
