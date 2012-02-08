@@ -14,8 +14,8 @@ function [xVals, yVals, classGrid] = gridPrep(gridSize, varargin)
 		maxY_vals = [maxY_vals max(yVals)];
 	end
 	
-	xVals = min(minX_vals):gridSize:max(maxX_vals);
-	yVals = min(minY_vals):gridSize:max(maxY_vals);
+	xVals = min(minX_vals)-1:gridSize:max(maxX_vals)+1;
+	yVals = min(minY_vals)-1:gridSize:max(maxY_vals)+1;
 	classGrid = zeros(length(yVals),length(xVals));
 
 end
