@@ -23,9 +23,9 @@ confusionmat(dataSet_AB(:,3),GED_results_AB);
 confusionmat(dataSet_AB(:,3),MED_results_AB);
 confusionmat(dataSet_AB(:,3),MAP_results_AB);
 
-confusionmat(dataSet_CDE(:,3),GED_results_CDE);
-confusionmat(dataSet_CDE(:,3),MED_results_CDE);
-confusionmat(dataSet_CDE(:,3),MAP_results_CDE);
+cc=confusionmat(dataSet_CDE(:,3),GED_results_CDE);
+dd=confusionmat(dataSet_CDE(:,3),MED_results_CDE);
+ee=confusionmat(dataSet_CDE(:,3),MAP_results_CDE);
 
 %% For nearest neighbor need to have training set...
 dataSet_AB_shuf=dataSet_AB(randperm(length(dataSet_AB)), :);

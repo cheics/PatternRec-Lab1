@@ -5,8 +5,8 @@ VISIBLE_FLAG = 1;
 % constants
 unitContourSize = 10000;
 %gridSize = 0.02;
-% gridSize = 0.05;
-gridSize = 0.5;
+gridSize = 0.05;
+% gridSize = 0.5;
 fontSize = 10;
 figSize = [0 0 6 4];% [something, something, width, height]
 shadeVal=0.07;
