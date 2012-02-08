@@ -4,9 +4,9 @@ VISIBLE_FLAG = 1;
 
 % constants
 unitContourSize = 10000;
-gridSize = 0.02;
-%gridSize = 0.05;
-%gridSize = 0.5;
+%gridSize = 0.02;
+% gridSize = 0.05;
+gridSize = 0.5;
 fontSize = 10;
 figSize = [0 0 6 4];% [something, something, width, height]
 shadeVal=0.07;
@@ -92,6 +92,11 @@ print -dpng -r300 'fig1b-CDE_cluster'
 
 xyGrid_AB=zeros(size(MED_AB,1), size(MED_AB,2), 2);
 
+GED_AB=MED_AB;
+GED_CDE=MED_CDE;
+MAP_AB=MED_AB;
+MAP_CDE=MED_CDE;
+
 for j = 1:size(MED_AB,1)
 	for i = 1:size(MED_AB,2)
 		xyGrid_AB(j, i, :) = [xVals_AB(i), yVals_AB(j)];
@@ -144,17 +149,17 @@ end
 % 3.2 GED Class
 %-------------------------------------------------------------------------------
 % GED_AB
-for i = 1:size(MED_AB,1)
-  for j = 1:size(MED_AB,2)
-		MED_AB(i,j)=GED_Class2([xVals_AB(j), yVals_AB(i)],mu_A,Sigma_A,...
+for i = 1:size(GED_AB,1)
+  for j = 1:size(GED_AB,2)
+		GED_AB(i,j)=GED_Class2([xVals_AB(j), yVals_AB(i)],mu_A,Sigma_A,...
             N_A,mu_B,Sigma_B,N_B);
   end
 end
 
 % GED_CDE
-for i = 1:size(MED_CDE,1)
-  for j = 1:size(MED_CDE,2)
-		MED_CDE(i,j)=GED_Class3([xVals_CDE(j), yVals_CDE(i)],...
+for i = 1:size(GED_CDE,1)
+  for j = 1:size(GED_CDE,2)
+		GED_CDE(i,j)=GED_Class3([xVals_CDE(j), yVals_CDE(i)],...
             mu_C,Sigma_C,N_C,mu_D,Sigma_D,N_D,mu_E,Sigma_E,N_E);
   end
 end
@@ -163,23 +168,23 @@ figure(fig1);
 if VISIBLE_FLAG == 0
   set(fig1,'visible','off');
 end
-[c,h] =contour(xVals_AB,yVals_AB,MED_AB,1, '-m');
+[c,h] =contour(xVals_AB,yVals_AB,GED_AB,1, '-m');
 %ch = get(h,'child'); alpha(ch,shadeVal);
  
 figure(fig2);
 if VISIBLE_FLAG == 0
   set(fig2,'visible','off');
 end
-[c,h] =contour(xVals_CDE,yVals_CDE,MED_CDE,2, '-m');
+[c,h] =contour(xVals_CDE,yVals_CDE,GED_CDE,2, '-m');
 %ch = get(h,'child'); alpha(ch,shadeVal);
 
 %-------------------------------------------------------------------------------
 % 3.3 MAP Class
 %-------------------------------------------------------------------------------
 % MAP_AB
-for i = 1:size(MED_AB,1)
-  for j = 1:size(MED_AB,2)
-	MED_AB(i,j)=MAP_class2([xVals_AB(j), yVals_AB(i)], ...
+for i = 1:size(MAP_AB,1)
+  for j = 1:size(MAP_AB,2)
+	MAP_AB(i,j)=MAP_class2([xVals_AB(j), yVals_AB(i)], ...
 		mu_A,Sigma_A,N_A,mu_B,Sigma_B,N_B);
   end
 end
@@ -187,14 +192,14 @@ figure(fig1);
 if VISIBLE_FLAG == 0
   set(fig1,'visible','off');
 end
-[c,h] =contour(xVals_AB,yVals_AB,MED_AB,1,'-b');
+[c,h] =contour(xVals_AB,yVals_AB,MAP_AB,1,'-b');
 %ch = get(h,'child'); alpha(ch,shadeVal);
 print -dpng -r300 'fig2a-AB_MED_MICD_MAP'
 
 % MAP_CDE
-for i = 1:size(MED_CDE,1)
-  for j = 1:size(MED_CDE,2)
-	MED_CDE(i,j)=MAP_class3([xVals_CDE(j), yVals_CDE(i)], ...
+for i = 1:size(MAP_CDE,1)
+  for j = 1:size(MAP_CDE,2)
+	MAP_CDE(i,j)=MAP_class3([xVals_CDE(j), yVals_CDE(i)], ...
 		mu_C,Sigma_C,N_C,mu_D,Sigma_D,N_D,mu_E,Sigma_E,N_E);
   end
 end
@@ -202,7 +207,7 @@ figure(fig2);
 if VISIBLE_FLAG == 0
   set(fig2,'visible','off');
 end
-[c,h] =contour(xVals_CDE,yVals_CDE,MED_CDE,2,'-b');
+[c,h] =contour(xVals_CDE,yVals_CDE,MAP_CDE,2,'-b');
 %ch = get(h,'child'); alpha(ch,shadeVal);
 print -dpng -r300 'fig2b-AB_MED_MICD_MAP'
 

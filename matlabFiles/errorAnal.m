@@ -5,16 +5,24 @@ GED_results_AB = interp2(xVals_AB,yVals_AB,GED_AB, ...
 	dataSet_AB(:,1),dataSet_AB(:,2), 'nearest');
 
 MED_results_AB = interp2(xVals_AB,yVals_AB,MED_AB, ...
-	dataSet_AB(:,1),dataSet_AB(:,2), '*nearest*');
+	dataSet_AB(:,1),dataSet_AB(:,2), 'nearest');
 
 MAP_results_AB = interp2(xVals_AB,yVals_AB,MAP_AB, ...
-	dataSet_AB(:,1),dataSet_AB(:,2), '*nearest*');
+	dataSet_AB(:,1),dataSet_AB(:,2), 'nearest');
 
 GED_results_CDE = interp2(xVals_CDE,yVals_CDE,GED_CDE, ...
-	dataSet_CDE(:,1),dataSet_CDE(:,2), '*nearest*');
+	dataSet_CDE(:,1),dataSet_CDE(:,2), 'nearest');
 
 MED_results_CDE = interp2(xVals_CDE,yVals_CDE,MED_CDE, ...
-	dataSet_CDE(:,1),dataSet_CDE(:,2), '*nearest*');
+	dataSet_CDE(:,1),dataSet_CDE(:,2), 'nearest');
 
 MAP_results_CDE = interp2(xVals_CDE,yVals_CDE,MAP_CDE, ...
-	dataSet_CDE(:,1),dataSet_CDE(:,2), '*nearest*');
+	dataSet_CDE(:,1),dataSet_CDE(:,2), 'nearest');
+
+confusionmat(dataSet_AB(:,3),GED_results_AB)
+confusionmat(dataSet_AB(:,3),MED_results_AB)
+confusionmat(dataSet_AB(:,3),MAP_results_AB)
+
+confusionmat(dataSet_CDE(:,3),GED_results_CDE)
+confusionmat(dataSet_CDE(:,3),MED_results_CDE)
+confusionmat(dataSet_CDE(:,3),MAP_results_CDE)
