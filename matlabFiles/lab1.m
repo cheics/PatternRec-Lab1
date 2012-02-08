@@ -4,11 +4,12 @@ VISIBLE_FLAG = 1;
 
 % constants
 unitContourSize = 10000;
-gridSize = 0.05;
-gridSize = 0.5;
+gridSize = 0.02;
+%gridSize = 0.05;
+%gridSize = 0.5;
 fontSize = 10;
 figSize = [0 0 6 4];% [something, something, width, height]
-shadeVal=0.04;
+shadeVal=0.07;
 
 % Cluster data
 N_A = 200;
@@ -129,15 +130,15 @@ figure(fig1);
 if VISIBLE_FLAG == 0
   set(fig1,'visible','off');
 end
-[c,h] =contourf(xVals_AB,yVals_AB,MED_AB,1);
-ch = get(h,'child'); alpha(ch,shadeVal);
+[c,h] =contour(xVals_AB,yVals_AB,MED_AB,1,'-c');
+%ch = get(h,'child'); alpha(ch,shadeVal);
 
 figure(fig2);
 if VISIBLE_FLAG == 0
   set(fig2,'visible','off');
 end
-[c,h] =contourf(xVals_CDE,yVals_CDE,MED_CDE,2);
-ch = get(h,'child'); alpha(ch,shadeVal);
+[c,h] =contour(xVals_CDE,yVals_CDE,MED_CDE,2,'-c');
+%ch = get(h,'child'); alpha(ch,shadeVal);
 
 %-------------------------------------------------------------------------------
 % 3.2 GED Class
@@ -162,15 +163,15 @@ figure(fig1);
 if VISIBLE_FLAG == 0
   set(fig1,'visible','off');
 end
-[c,h] =contourf(xVals_AB,yVals_AB,MED_AB,1);
-ch = get(h,'child'); alpha(ch,shadeVal);
+[c,h] =contour(xVals_AB,yVals_AB,MED_AB,1, '-m');
+%ch = get(h,'child'); alpha(ch,shadeVal);
  
 figure(fig2);
 if VISIBLE_FLAG == 0
   set(fig2,'visible','off');
 end
-[c,h] =contourf(xVals_CDE,yVals_CDE,MED_CDE,2);
-ch = get(h,'child'); alpha(ch,shadeVal);
+[c,h] =contour(xVals_CDE,yVals_CDE,MED_CDE,2, '-m');
+%ch = get(h,'child'); alpha(ch,shadeVal);
 
 %-------------------------------------------------------------------------------
 % 3.3 MAP Class
@@ -186,8 +187,8 @@ figure(fig1);
 if VISIBLE_FLAG == 0
   set(fig1,'visible','off');
 end
-[c,h] =contourf(xVals_AB,yVals_AB,MED_AB,1);
-ch = get(h,'child'); alpha(ch,shadeVal);
+[c,h] =contour(xVals_AB,yVals_AB,MED_AB,1,'-b');
+%ch = get(h,'child'); alpha(ch,shadeVal);
 print -dpng -r300 'fig2a-AB_MED_MICD_MAP'
 
 % MAP_CDE
@@ -201,8 +202,8 @@ figure(fig2);
 if VISIBLE_FLAG == 0
   set(fig2,'visible','off');
 end
-[c,h] =contourf(xVals_CDE,yVals_CDE,MED_CDE,2);
-ch = get(h,'child'); alpha(ch,shadeVal);
+[c,h] =contour(xVals_CDE,yVals_CDE,MED_CDE,2,'-b');
+%ch = get(h,'child'); alpha(ch,shadeVal);
 print -dpng -r300 'fig2b-AB_MED_MICD_MAP'
 
 %-------------------------------------------------------------------------------
