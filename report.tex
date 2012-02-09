@@ -1,7 +1,14 @@
 \documentclass[article, 1.5space, letterpaper, 12pt, oneside, header, footer]{SydeClass}
 \graphicspath{{images/}}
 \usepackage{subfigure}
+\usepackage{amsmath}
 \usepackage{eqnarray}
+\usepackage{rotating}
+
+\usepackage{array}
+\usepackage{multirow}
+
+
 
 
 % --------- Title Info -----------
@@ -39,20 +46,8 @@
 \pagenumbering{arabic}
 
 \include{10_introduction}
-\section{Introduction}
-\\This lab investigates three areas: calculating orthonormal transformations, creating decision boundaries using different classification methods, and assessing classification error associated with different methods. All calculations for the purpose of this lab are carried out using the MatLab program.
+\include{20_generatingClusters}
 
-\\First, data for five separate classes is generated using bivariate Gaussian distribution parameters provided in the lab description. This results in five clusters of two-dimensional data being generated, based on the underlying statistics specified, which is analyzed with respect to the unit standard deviation contour in each class. Analysis of the data is separated into two cases: Case 1 corresponding to the first two classes, and Case 2 corresponding to the remaining three.
-
-\\Next, the cluster data generated is used in development of five separate classification methods to allow for the plotting of decision boundaries in each case. First, the Mean Euclidean Distance (MED), Generalized Euclidean Distance (GED), and Maximum A Posteriori (MAP) methods are implemented and applied to all classes of data. Decision boundaries are plotted for all three methods using data from each of the Cases developed previously, to allow for comparison of the boundaries. Next, the Nearest Neighbor (NN) and Five Nearest Neighbor (5NN) methods are applied to all classes of data. The decision boundaries for both methods are plotted again for the Case 1 and Case 2 sets of classes to allow for comparison.
-
-\\Lastly, the experimental error rate and confusion matrices are developed for each method applied to both Case 1 and Case 2. The experimental error and confusion matrices are analyzed to allow for comparison between the experimental results of each method.
-
-\section{Generating Clusters}
-
-\subsection{Implementation}
-
-\subsection{Results}
 
 \section{Classifiers}
 
@@ -61,26 +56,48 @@
 \subsubsection{Mean Euclidean Distance}
 
 \subsubsection{General Euclidean Distance}
-\\The GED classifier is implemented in a similar manner as the MED classifier. However, in the case of GED a whitening transform is applied to the samples to transform them onto a space where features are both uncorrelated, and have unit-variances. This is accomplished using the weighting matrix W. The distance between two points in the transformed space is calculated as,
+The GED classifier is implemented in a similar manner as the MED classifier. However, in the case of GED a whitening transform is applied to the samples to transform them onto a space where features are both uncorrelated, and have unit-variances. This is accomplished using the weighting matrix W. The distance between two points in the transformed space is calculated as,
 
-\[W=\Lambda^{-1/2}\Phi^{T}\]
 
-\\In the above equation, $\Lambda$ contains the eigen values of the covariance matrix $\Sigma\ as elements, and $\Phi$ contains the eigenvectors of $\Sigma\. After simplification, the distance function is therefore found to be,
+\begin{eqnarray}
+\label{eqn:GED-whitening}
+\left [ W=\Lambda^{-1/2}\Phi^{T}  \right ]
+\end{eqnarray}
 
-\[d_{G}(x,z)= \left [ (x-z)^{T}\Phi\Lambda^{-1/2}\Phi^{T}(x-z) \right ]^{1/2}\]
 
-\\The decision boundary is therefore calculated in the ttwo- and three- class cases as,
 
-\d_{E}\(x,z_{1})=d_{E}\(x,z_{2})
-\\left [ (x-z^_{1})^{T}\Phi\Lambda^{-1/2}\Phi^{T}(x-z^_{1}) \right ]^{1/2}\] = \left [ (x-z^_{2})^{T}\Phi\Lambda^{-1/2}\Phi^{T}(x-z^_{2}) \right ]^{1/2}\]
-\\left [ (x-z^_{1})^{T}\Phi\Lambda^{-1/2}\Phi^{T}(x-z^_{1}) \right ]^{1/2}\] = \left [ (x-z^_{2})^{T}\Phi\Lambda^{-1/2}\Phi^{T}(x-z^_{2}) \right ]^{1/2}\] = \left [ (x-z^_{3})^{T}\Phi\Lambda^{-1/2}\Phi^{T}(x-z^_3\right ]^{1/2}\]
+In the above equation, $\Lambda$ contains the eigen values of the covariance matrix $\Sigma$ as elements, and $\Phi$ contains the eigenvectors of $\Sigma$. The simplified distance function is included in \ref{eqn:GED}.
 
-\\In the case of the MatLab implementation, all points on the grid are classified based on identifying the minimum distance between the point and the mean of each class in the transformed space. This is shown below for both the two- and three- class case,
+\begin{eqnarray}
+\label{eqn:GED}
+{d}_{G}(x,z) = {\left [ (x-z)^{T}\Phi\Lambda^{-1/2}\Phi^{T}(x-z) \right ]}^{1/2}
+\end{eqnarray}
 
-\min(d_{E}\(x,z_{1}), d_{E}\(x,z_{2}))
-\min(d_{E}\(x,z_{1}), d_{E}\(x,z_{2}), d_{E}\(x,z_{3}))
 
-\\This implementation of the GED classifier and method for creating the decision boundary is shown in Appendix A.
+The decision boundary is therefore calculated in the ttwo- and three- class cases as,
+
+\begin{eqnarray}
+\label{eqn:boundary-GED}
+& d_{E} (x,z_{1}) = d_{E} (x,z_{2}) \\
+& \left [ (x-{z}_{1})^{T}\Phi\Lambda^{-1/2}\Phi^{T}(x-z_{1}) \right ]^{1/2} \\
+= & \left [ (x-z_{2})^{T}\Phi\Lambda^{-1/2}\Phi^{T}(x-z_{2}) \right ]^{1/2}  \nonumber \\
+&\left [ (x-{z}_{1})^{T}\Phi\Lambda^{-1/2}\Phi^{T}(x-z_{1}) \right ]^{1/2} \\
+= &\left [ (x-z_{2})^{T}\Phi\Lambda^{-1/2}\Phi^{T}(x-z_{2}) \right ]^{1/2}  \nonumber \\
+= &\left [ (x-z_{3})^{T}\Phi\Lambda^{-1/2}\Phi^{T}(x-z_{3}) \right ]^{1/2}  \nonumber
+\end{eqnarray}
+
+
+
+In the case of the MatLab implementation, all points on the grid are classified based on identifying the minimum distance between the point and the mean of each class in the transformed space. This is shown below for both the two- and three- class case,
+
+\begin{eqnarray}
+\label{eqn:pointClass-GED}
+min(d_{E} (x,z_{1}), d_{E} (x,z_{2})) \\
+min(d_{E} (x,z_{1}), d_{E} (x,z_{2}), d_{E} (x,z_{3}))
+\end{eqnarray}
+
+
+This implementation of the GED classifier and method for creating the decision boundary is shown in Appendix A.
 
 \subsubsection{Maximum A Posteriori}
 
@@ -90,7 +107,7 @@
 
 \subsection{Results}
 
-\section{Error Analysis}
+\include{50_errorAnal}
 
 \section{Conclusions}
 
