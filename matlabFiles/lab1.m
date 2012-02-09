@@ -1,6 +1,6 @@
 close all; clear; clc;
 
-VISIBLE_FLAG = 1;
+VISIBLE_FLAG = 0;
 
 % constants
 unitContourSize = 10000;
@@ -318,3 +318,85 @@ print -dpng -r300 'fig4b-CDE_5NN'
 %===============================================================================
 % 4. ERROR ANALYSIS
 %===============================================================================
+% Finding P(E)
+% The following method focuses on implementing the discrete implementation of
+% equation 4.24 on page 68 of the SYDE 372 course notes.
+%-------------------------------------------------------------------------------
+
+% Define binary arrays of class regions R_A, etc.
+%- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+R_A = zeros(size(MAP_AB));
+R_B = R_A;
+R_C = zeros(size(MAP_CDE));
+R_D = R_C;
+R_E = R_C;
+
+R_A(find(MAP_AB == 1)) = 1;
+R_B(find(MAP_AB == 2)) = 1;
+R_C(find(MAP_CDE == 1)) = 1;
+R_D(find(MAP_CDE == 2)) = 1;
+R_E(find(MAP_CDE == 3)) = 1;
+
+% Define P(A), etc.
+%- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+P_of_A = N_A/(N_A+N_B);
+P_of_B = N_B/(N_A+N_B);
+P_of_C = N_C/(N_C+N_D+N_E);
+P_of_D = N_D/(N_C+N_D+N_E);
+P_of_E = N_E/(N_C+N_D+N_E);
+
+% Define P(x|A), etc. for each discrete grid point
+%- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+P_of_xgivenA = zeros(size(MAP_AB));
+P_of_xgivenB = P_of_xgivenA;
+P_of_xgivenC = zeros(size(MAP_CDE));
+P_of_xgivenD = P_of_xgivenC;
+P_of_xgivenE = P_of_xgivenC;
+
+% see SYDE 372 course notes, page 21, equation 2.32 for definition of
+% multivariate Gaussian distribution
+for j = 1:size(P_of_xgivenA,1)
+	for i = 1:size(P_of_xgivenA,2)
+		P_of_xgivenA(j, i) = exp(-0.5*([xVals_AB(i), yVals_AB(j)]-mu_A)*inv(Sigma_A)*([xVals_AB(i), yVals_AB(j)]-mu_A)');
+	end
+end
+P_of_xgivenA = P_of_xgivenA/(2*pi()*sqrt(det(Sigma_A)));
+
+for j = 1:size(P_of_xgivenB,1)
+	for i = 1:size(P_of_xgivenB,2)
+		P_of_xgivenB(j, i) = exp(-0.5*([xVals_AB(i), yVals_AB(j)]-mu_B)*inv(Sigma_B)*([xVals_AB(i), yVals_AB(j)]-mu_B)');
+	end
+end
+P_of_xgivenB = P_of_xgivenB/(2*pi()*sqrt(det(Sigma_B)));
+
+for j = 1:size(P_of_xgivenC,1)
+	for i = 1:size(P_of_xgivenC,2)
+		P_of_xgivenC(j, i) = exp(-0.5*([xVals_CDE(i), yVals_CDE(j)]-mu_C)*inv(Sigma_C)*([xVals_CDE(i), yVals_CDE(j)]-mu_C)');
+	end
+end
+P_of_xgivenC = P_of_xgivenC/(2*pi()*sqrt(det(Sigma_C)));
+
+for j = 1:size(P_of_xgivenD,1)
+	for i = 1:size(P_of_xgivenD,2)
+		P_of_xgivenD(j, i) = exp(-0.5*([xVals_CDE(i), yVals_CDE(j)]-mu_D)*inv(Sigma_D)*([xVals_CDE(i), yVals_CDE(j)]-mu_D)');
+	end
+end
+P_of_xgivenD = P_of_xgivenD/(2*pi()*sqrt(det(Sigma_D)));
+
+for j = 1:size(P_of_xgivenE,1)
+	for i = 1:size(P_of_xgivenE,2)
+		P_of_xgivenE(j, i) = exp(-0.5*([xVals_CDE(i), yVals_CDE(j)]-mu_E)*inv(Sigma_E)*([xVals_CDE(i), yVals_CDE(j)]-mu_E)');
+	end
+end
+P_of_xgivenE = P_of_xgivenE/(2*pi()*sqrt(det(Sigma_E)));
+
+% Find P(E|x) (i.e. P(E) before integrating/summing; see equation 4.20) for each
+% grid point
+%- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+P_of_Egivenx_AB= P_of_xgivenA*P_of_A.*R_B + P_of_xgivenB*P_of_B.*R_A;
+P_of_Egivenx_CDE= (P_of_xgivenD*P_of_D+P_of_xgivenE*P_of_E).*R_C + (P_of_xgivenC*P_of_C+P_of_xgivenE*P_of_E).*R_D + (P_of_xgivenC*P_of_C+P_of_xgivenD*P_of_D).*R_E;
+
+% Find P(E) by summing P(E|x)*gridSize^2
+%- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+P_of_E_AB = sum(P_of_Egivenx_AB(:))*gridSize^2;
+P_of_E_CDE = sum(P_of_Egivenx_CDE(:))*gridSize^2;
