@@ -1,5 +1,21 @@
 \section{Error Analysis}
- 
+To find the experimental error rate $P(\epsilon)$ for CASE 1, a discretized form of the following equation was used.
+$P(\epsilon)=\int_{R_A}P(\underbar x|B)P(B)d\underbar x +
+             \int_{R_B}P(\underbar x|A)P(A)d\underbar x$
+The discretized form becomes
+$P(\epsilon)\approx\sum_{i,j\ in\ R_A}P(\underbar x|B)_{i,j}P(B)wh +
+                   \sum_{i.j\ in\ R_B}P(\underbar x|A)_{i,j}P(A)wh$
+where $w$ and $l$ are the width and height of the discretized points. Although the equation describes summing values over an infinite number of points, a finite set of points had to be selected to feasibly perform the calculation. This introduces some negligible error. The same number of points used to calculate the classification data was used to calculate $P(\epsilon)$. The result was $P(\epsilon)\approx0.06281$.
+
+To find $P(\epsilon)$ for CASE 2, the same method was used as in CASE 1 except that the equation for $P(\epsilon)$ had to be modified for 3 classes.
+$P(\epsilon)=\int_{R_C}[P(\underbar x|D)P(D)+P(\underbar x|E)P(E)]d\underbar x +
+             \int_{R_D}[P(\underbar x|C)P(C)+P(\underbar x|E)P(E)]d\underbar x +
+             \int_{R_E}[P(\underbar x|C)P(C)+P(\underbar x|D)P(D)]d\underbar x$
+The discretized form of this equation becomes:
+$P(\epsilon)\approx\sum_{i,j\ in\ R_C}[P(\underbar x|D)P(D)+P(\underbar x|E)P(E)]wh +
+                   \sum_{i,j\ in\ R_D}[P(\underbar x|C)P(C)+P(\underbar x|E)P(E)]wh +
+                   \sum_{i,j\ in\ R_E}[P(\underbar x|C)P(C)+P(\underbar x|D)P(D)]wh$
+The result for CASE 2 was $P(\epsilon)\approx0.1686$.
  
 \subsection{GED, MED and MAP}
 
