@@ -52,6 +52,13 @@ This implementation of the GED classifier and method for creating the decision b
 
 \subsubsection{Maximum A Posteriori}
 
+The MAP classifier skews the GED classifier according to the prior probabilities of the various classes.
+
+\begin{eqnarray}
+max( \hspace{3mm} p(C)p(x\mid C), \hspace{3mm} p(D)p(x\mid D), \hspace{3mm} p(E)p(x\mid E) ) 
+\end{eqnarray}
+
+
 \subsubsection{Nearest Neighbor}
 
 The nearest neighbor classifier uses MatLab implementation of $knnclassify$. A nearest neighbor classifier will test a point and compare it's distance to all other known classified points. The test point will belong to the class which contains a point with the least ecludian distance to the test point.
