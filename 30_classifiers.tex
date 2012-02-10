@@ -4,7 +4,7 @@
 
 \subsubsection{Mean Euclidean Distance}
 
-The MED classifier uses the class means as prototypes for the classifier. The class membership is determined by specifying the class which has the smallest euclidian distance from the class mean to the test point.
+The MED classifier uses the class means as prototypes for the classifier. The class membership is determined by specifying the class which has the smallest euclidean distance from the class mean to the test point.
 
 \subsubsection{General Euclidean Distance}
 The GED classifier is implemented in a similar manner as the MED classifier. However, in the case of GED a whitening transform is applied to the samples to transform them onto a space where features are both uncorrelated, and have unit-variances. This is accomplished using the weighting matrix W. The distance between two points in the transformed space is calculated as:
@@ -52,26 +52,26 @@ This implementation of the GED classifier and method for creating the decision b
 
 \subsubsection{Maximum A Posteriori}
 
-The MAP classifier was being used on known distributions, namely normal distributions. The likelyhood $p(\underbar{x} \mid Y)$; where $Y$ is a class among A,B,C,D,E; was calculated for each class at each point in the grid. The classifier then skewed the distributions according to the prior probabilities. Pairwise comparisons were made among the 3 class case in order to determine the class.
+The MAP classifier was being used on known distributions, namely normal distributions. The likelihood $p(\underbar{x} \mid Y)$; where $Y$ is a class among A,B,C,D,E; was calculated for each class at each point in the grid. The classifier then skewed the distributions according to the prior probabilities. Pairwise comparisons were made among the 3 class case in order to determine the class.
 
 \begin{eqnarray}
 \label{eqn:pointClass-MAP}
  max \left( p(\underbar{x} \mid A)p(A), \hspace{3mm} p(\underbar{x} \mid B)p(B) , \hspace{3mm} p(\underbar{x} \mid C)p(C) \right) 
 \end{eqnarray}
 
-\subsubsection{Nearest Neighbor}
+\subsubsection{Nearest Neighbour}
 
-The nearest neighbor classifier uses MATLAB implementation of $knnclassify$. A nearest neighbor classifier will test a point and compare its distance to all other known classified points. The test point will belong to the class which contains a point with the least Euclidian distance to the test point.
+The nearest neighbour classifier uses MATLAB implementation of $knnclassify$. A nearest neighbour classifier will test a point and compare its distance to all other known classified points. The test point will belong to the class which contains a point with the least Euclidean distance to the test point.
 
-The classification boundary is constructed by evaluating many test points on a grid, using the generated data as training data. Due to the nature of nearest neighbor, all training data will be classified correctly; each classified point is its own nearest neighbor.
+The classification boundary is constructed by evaluating many test points on a grid, using the generated data as training data. Due to the nature of nearest neighbour, all training data will be classified correctly; each classified point is its own nearest neighbour.
 
-\subsubsection{Five Nearest Neighbor}
+\subsubsection{Five Nearest Neighbour}
 
-The 5NN classifier uses MATLAB implementation of $knnclassify$. A nearest neighbor classifier will test a point and compare its distance to all other known classified points. The 5 nearest classified points are determined, and the class of each of the points is determined. The class with the majority of class points in the 5 nearest neighbors is designated the class for the test point.
+The 5NN classifier uses MATLAB implementation of $knnclassify$. A nearest neighbour classifier will test a point and compare its distance to all other known classified points. The 5 nearest classified points are determined, and the class of each of the points is determined. The class with the majority of class points in the 5 nearest neighbours is designated the class for the test point.
 
-Note that the method of selecting the 5 nearest sample points from each class and selecting the class with the lowest sample mean was not used, as there exist many variations of the nearest neighbor method, and the MATLAB default is likely the default due to its accuracy.
+Note that the method of selecting the 5 nearest sample points from each class and selecting the class with the lowest sample mean was not used, as there exist many variations of the nearest neighbour method, and the MATLAB default is likely the default due to its accuracy.
 
-The classification boundary is constructed by evaluating many test points on a grid, using the generated data as training data. Unlike nearest neighbor, 5 nearest neighbor will not classify all training data correctly; the use of 5 nearest neighbors means that not all points will have 2 other nearest neighbors that are of the same class.
+The classification boundary is constructed by evaluating many test points on a grid, using the generated data as training data. Unlike nearest neighbour, 5 nearest neighbour will not classify all training data correctly; the use of 5 nearest neighbours means that not all points will have 2 other nearest neighbours that are of the same class.
 
 
 
@@ -88,7 +88,7 @@ All classification methods were applied in each of Case 1 and Case 2. To aid in 
 	\label{fig:med_ged_map_classifier_case1}
 \end{figure}
 
-In the Case 2 scenario (Figure~\ref{fig:med_ged_map_classifier_case2}), the MED classification boundary is shown as the light blue lines. The MED classification boundary is shown to be three straight lines, intersecting near the mid-point between the three data clusters. The MED classifier does not take into account the covariance matrices of the three data clusters, so the performance described is as expected. The GED classification boundary is shown as the contoured magenta lines in the figure, intersecting near the midpoint between the three classes of data. This is an intuitive result, as the classification boundary better wraps around the unit standard deviation contours for three data classes. The MAP decision boundary is shown as the blue lines, slightly offset to the left of the GED decision boundary. In this case the decision boundaries do not overlay each other as in the Case 1 scenario. This is a result of the a priori probabilities for each of the three classes being different in this case, with the probability information altering the performance of the classification method.
+In the Case 2 scenario (Figure~\ref{fig:med_ged_map_classifier_case2}), the MED classification boundary is shown as the light blue lines. The MED classification boundary is shown to be three straight lines, intersecting near the mid-point between the three data clusters. The MED classifier does not take into account the covariance matrices of the three data clusters, so the performance described is as expected. The GED classification boundary is shown as the contoured magenta lines in the figure, intersecting near the midpoint between the three classes of data. This is an intuitive result, as the classification boundary better wraps around the unit standard deviation contours for three data classes. The MAP decision boundary is shown as the blue lines, slightly offset to the left of the GED decision boundary. In this case the decision boundaries do not overlay each other as in the Case 1 scenario. This is a result of the a priory probabilities for each of the three classes being different in this case, with the probability information altering the performance of the classification method.
 
 \begin{figure}[ht]
 \centering
@@ -111,7 +111,7 @@ Next, the NN and 5NN classification boundaries were plotted together for both th
 	\includegraphics[width=0.45\linewidth]{fig4a-AB_5NN}
 	}
 	
-	\caption{Nearest Neighbor boundaries for Case 1}
+	\caption{Nearest Neighbour boundaries for Case 1}
 	\label{fig:nn_boundary_case1}
 \end{figure}
 
@@ -126,6 +126,6 @@ For the Case 2 scenario, Figure~\ref{fig:nn_boundary_case2}, performance of the 
 	\includegraphics[width=0.45\linewidth]{fig4b-CDE_5NN}
 	}
 	
-	\caption{Nearest Neighbor boundaries for Case 2}
+	\caption{Nearest Neighbour boundaries for Case 2}
 	\label{fig:nn_boundary_case2}
 \end{figure}
