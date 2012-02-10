@@ -4,6 +4,8 @@
 
 \subsubsection{Mean Euclidean Distance}
 
+The MED classifier uses the means of the classes as prototypes for the classifier. The test point to each class mean; the minimum euclidian distance between the test point and one of the various class means designates the class.
+
 \subsubsection{General Euclidean Distance}
 The GED classifier is implemented in a similar manner as the MED classifier. However, in the case of GED a whitening transform is applied to the samples to transform them onto a space where features are both uncorrelated, and have unit-variances. This is accomplished using the weighting matrix W. The distance between two points in the transformed space is calculated as,
 
