@@ -18,17 +18,17 @@ where $w$ and $l$ are the width and height of the discretized points. Although t
 To find $P(\epsilon)$ for CASE 2, the same method was used as in CASE 1 except that the equation for $P(\epsilon)$ had to be modified for 3 classes.
 \begin{eqnarray}
 \label{eqn:3-class_cont_PofE}
-P(\epsilon)=\int_{R_C}[P(\underbar{x}|D)P(D)+P(\underbar{x}|E)P(E)]d\underbar{x} +
-            \int_{R_D}[P(\underbar{x}|C)P(C)+P(\underbar{x}|E)P(E)]d\underbar{x} +
-            \int_{R_E}[P(\underbar{x}|C)P(C)+P(\underbar{x}|D)P(D)]d\underbar{x}
+P(\epsilon)& = \int_{R_C}[P(\underbar{x}|D)P(D)+P(\underbar{x}|E)P(E)]d\underbar{x} \\
+           & + \int_{R_D}[P(\underbar{x}|C)P(C)+P(\underbar{x}|E)P(E)]d\underbar{x} \nonumber\\
+           & + \int_{R_E}[P(\underbar{x}|C)P(C)+P(\underbar{x}|D)P(D)]d\underbar{x}\nonumber
 \end{eqnarray}
 
 The discretized form of this equation becomes:
 \begin{eqnarray}
 \label{eqn:3-class_disc_PofE}
-P(\epsilon)\approx\sum_{i,j\ in\ R_C}[P(\underbar{x}|D)P(D)+P(\underbar{x}|E)P(E)]wh +
-                  \sum_{i,j\ in\ R_D}[P(\underbar{x}|C)P(C)+P(\underbar{x}|E)P(E)]wh +
-                  \sum_{i,j\ in\ R_E}[P(\underbar{x}|C)P(C)+P(\underbar{x}|D)P(D)]wh
+P(\epsilon)&\approx \sum_{i,j\ in\ R_C}[P(\underbar{x}|D)_{i,j}P(D)+P(\underbar{x}|E)_{i,j}P(E)]wh \\
+           & +      \sum_{i,j\ in\ R_D}[P(\underbar{x}|C)_{i,j}P(C)+P(\underbar{x}|E)_{i,j}P(E)]wh \nonumber\\
+           & +      \sum_{i,j\ in\ R_E}[P(\underbar{x}|C)_{i,j}P(C)+P(\underbar{x}|D)_{i,j}P(D)]wh \nonumber
 \end{eqnarray}
 
 The result for CASE 2 was $P(\epsilon)\approx0.1686$.
@@ -77,7 +77,7 @@ For the GED, MED and MAP classifiers, the same data used to generate the classif
 	\begin{tabular}{ccc|c|c|c}
 	 & &\multicolumn{3}{c}{Predicted} &\\
 	  & & \bf{C} &  \bf{D} & \bf{E} & total \\
-	 \cline{3-5}
+	 \cline{3-6}
 	 \multirow{3}{*}{\begin{sideways}Actual\end{sideways}} & \bf{C'}& 91 & 0 & 9 & 100\\
 	 \cline{3-6}
 	 & \bf{D'}& 6 & 164 & 30 & 200\\
@@ -140,7 +140,7 @@ For the GED, MED and MAP classifiers, the same data used to generate the classif
 	\begin{tabular}{ccc|c|c|c}
 	 & &\multicolumn{3}{c}{Predicted} &\\
 	  & & \bf{C} &  \bf{D} & \bf{E} & total \\
-	 \cline{3-5}
+	 \cline{3-6}
 	 \multirow{3}{*}{\begin{sideways}Actual\end{sideways}} & \bf{C'}& 70 & 1 & 29 & 100\\
 	 \cline{3-6}
 	 & \bf{D'}& 9 & 167 & 24 & 200\\
@@ -204,7 +204,7 @@ For the GED, MED and MAP classifiers, the same data used to generate the classif
 	\begin{tabular}{ccc|c|c|c}
 	 & &\multicolumn{3}{c}{Predicted} &\\
 	  & & \bf{C} &  \bf{D} & \bf{E} & total \\
-	 \cline{3-5}
+	 \cline{3-6}
 	 \multirow{3}{*}{\begin{sideways}Actual\end{sideways}} & \bf{C'}& 79 & 0 & 21 & 100\\
 	 \cline{3-6}
 	 & \bf{D'}& 4 & 174 & 22 & 200\\
@@ -273,7 +273,7 @@ For the NN and 5NN classifiers, the classifiers were developed from one set of d
 	\begin{tabular}{ccc|c|c|c}
 	 & &\multicolumn{3}{c}{Predicted} &\\
 	  & & \bf{C} &  \bf{D} & \bf{E} & total \\
-	 \cline{3-5}
+	 \cline{3-6}
 	 \multirow{3}{*}{\begin{sideways}Actual\end{sideways}} & \bf{C'}& 63 & 2 & 35 & 100\\
 	 \cline{3-6}
 	 & \bf{D'}& 3 & 160 & 37 & 200\\
@@ -336,7 +336,7 @@ For the NN and 5NN classifiers, the classifiers were developed from one set of d
 	\begin{tabular}{ccc|c|c|c}
 	 & &\multicolumn{3}{c}{Predicted} &\\
 	  & & \bf{C} &  \bf{D} & \bf{E} & total \\
-	 \cline{3-5}
+	 \cline{3-6}
 	 \multirow{3}{*}{\begin{sideways}Actual\end{sideways}} & \bf{C'}& 75 & 0 & 25 & 100\\
 	 \cline{3-6}
 	 & \bf{D'}& 1 & 181 & 18 & 200\\
