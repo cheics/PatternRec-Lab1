@@ -37,7 +37,7 @@ The decision boundary is therefore calculated in the two- and three- class cases
 
 
 
-In the case of the MatLab implementation, all points on the grid are classified based on identifying the minimum distance between the point and the mean of each class in the transformed space. This allows for a simple contour to be plotted showing the decision boundary between each class. This is shown below for both the two- and three- class case,
+In the case of the MATLAB implementation, all points on the grid are classified based on identifying the minimum distance between the point and the mean of each class in the transformed space. This allows for a simple contour to be plotted showing the decision boundary between each class. This is shown below for both the two- and three- class case,
 
 \begin{eqnarray}
 \label{eqn:pointClass-GED}
@@ -52,14 +52,14 @@ This implementation of the GED classifier and method for creating the decision b
 
 \subsubsection{Nearest Neighbor}
 
-The nearest neighbor classifier uses MatLab implementation of $knnclassify$. A nearest neighbor classifier will test a point and compare it's distance to all other known classified points. The test point will belong to the class which contains a point with the least ecludian distance to the test point.
+The nearest neighbor classifier uses MATLAB implementation of $knnclassify$. A nearest neighbor classifier will test a point and compare its distance to all other known classified points. The test point will belong to the class which contains a point with the least Euclidian distance to the test point.
 
-The classification boundary is constructed by evaluating many test points on a grid, using the generated data as training data. Due to the nature of nearest neigbor, all training data will be classified correctly; each classified point is it's own nearest neighor.
+The classification boundary is constructed by evaluating many test points on a grid, using the generated data as training data. Due to the nature of nearest neighbor, all training data will be classified correctly; each classified point is its own nearest neighbor.
 
 \subsubsection{Five Nearest Neighbor}
 
-The 5 nearest neighbor classifier uses MatLab implementation of $knnclassify$. A nearest neighbor classifier will test a point and compare it's distance to all other known classified points. The 5 nearest classified points are determined, and the class of each of the points is determined. The class with the majority of classpoints in the 5 nearest neighbors is designated the class for the test point.
+The 5NN classifier uses MATLAB implementation of $knnclassify$. A nearest neighbor classifier will test a point and compare its distance to all other known classified points. The 5 nearest classified points are determined, and the class of each of the points is determined. The class with the majority of class points in the 5 nearest neighbors is designated the class for the test point.
 
-Note that the method of selecting the 5 nearest sample points from each class and selecting the class the lowest sample mean was not used, as there exist many variations of the nearest neighbor method, and the Matlab default is likely the default due to it's accuracy.
+Note that the method of selecting the 5 nearest sample points from each class and selecting the class with the lowest sample mean was not used, as there exist many variations of the nearest neighbor method, and the MATLAB default is likely the default due to its accuracy.
 
-The classification boundary is constructed by evaluating many test points on a grid, using the generated data as training data. Unlike nearest neigbor, 5 nearest neighbor will not classify all training data correctly; the use of 5 nearest neighbors means that not all points will have 2 other nearest neighbors that are of the same class.
+The classification boundary is constructed by evaluating many test points on a grid, using the generated data as training data. Unlike nearest neighbor, 5 nearest neighbor will not classify all training data correctly; the use of 5 nearest neighbors means that not all points will have 2 other nearest neighbors that are of the same class.
