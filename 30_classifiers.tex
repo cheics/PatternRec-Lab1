@@ -4,7 +4,7 @@
 
 \subsubsection{Mean Euclidean Distance}
 
-The MED classifier uses the class means as prototypes for the classifier. The class membership is determined by specifying the class which has the smallest euclidean distance from the class mean to the test point.
+The MED classifier uses the class means as prototypes for the classifier. The class membership is determined by specifying the class which has the smallest Euclidean distance from the class mean to the test point.
 
 \subsubsection{General Euclidean Distance}
 The GED classifier is implemented in a similar manner as the MED classifier. However, in the case of GED a whitening transform is applied to the samples to transform them onto a space where features are both uncorrelated, and have unit-variances. This is accomplished using the weighting matrix W. The distance between two points in the transformed space is calculated as:
@@ -17,7 +17,7 @@ The GED classifier is implemented in a similar manner as the MED classifier. How
 
 
 
-In the above equation, $\Lambda$ contains the eigen values of the covariance matrix $\Sigma$ as elements, and $\Phi$ contains the eigenvectors of $\Sigma$. The simplified distance function is included in Equation~\ref{eqn:GED}.
+In the above equation, $\Lambda$ contains the Eigen values of the covariance matrix $\Sigma$ as elements, and $\Phi$ contains the eigenvectors of $\Sigma$. The simplified distance function is included in Equation~\ref{eqn:GED}.
 
 \begin{eqnarray}
 \label{eqn:GED}
