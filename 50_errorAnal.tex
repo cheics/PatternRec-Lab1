@@ -33,10 +33,16 @@ P(\epsilon)\approx\sum_{i,j\ in\ R_C}[P(\underbar{x}|D)P(D)+P(\underbar{x}|E)P(E
 
 The result for CASE 2 was $P(\epsilon)\approx0.1686$.
  
-\subsection{GED, MED and MAP}
+\subsection{Confusion matricies for GED, MED and MAP}
+
+A confusion matrix shows the performance of a classifier on a set of data. It compares the true values of the data against the predicted classifications by the classifier, and attempts to qunatify the types of errors being made.
+
+For the GED, MED and MAP classifiers, the same data used to generate the classifier was used to test the classifier.
+
+\clearpage
 
 \subsubsection{GED}
-\begin{figure}[ht]
+\begin{figure}[!ht]
 \begin{minipage}[b]{0.5\linewidth}
 \centering
 	\begin{tabular}{ccc|c|c}
@@ -65,7 +71,7 @@ The result for CASE 2 was $P(\epsilon)\approx0.1686$.
 \caption{GED performance on A and B}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}[!ht]
 \begin{minipage}[b]{0.5\linewidth}
 \centering
 	\begin{tabular}{ccc|c|c|c}
@@ -96,8 +102,9 @@ The result for CASE 2 was $P(\epsilon)\approx0.1686$.
 \caption{GED performance on C, D and E}
 \end{figure}
 
+
 \subsubsection{MED}
-\begin{figure}[ht]
+\begin{figure}[!ht]
 \begin{minipage}[b]{0.5\linewidth}
 \centering
 	\begin{tabular}{ccc|c|c}
@@ -127,7 +134,7 @@ The result for CASE 2 was $P(\epsilon)\approx0.1686$.
 \end{figure}
 
 
-\begin{figure}[ht]
+\begin{figure}[!ht]
 \begin{minipage}[b]{0.5\linewidth}
 \centering
 	\begin{tabular}{ccc|c|c|c}
@@ -158,10 +165,10 @@ The result for CASE 2 was $P(\epsilon)\approx0.1686$.
 \caption{MED performance on C, D and E}
 \end{figure}
 
-
+\clearpage
 
 \subsubsection{MAP}
-\begin{figure}[ht]
+\begin{figure}[!ht]
 \begin{minipage}[b]{0.5\linewidth}
 \centering
 	\begin{tabular}{ccc|c|c}
@@ -191,7 +198,7 @@ The result for CASE 2 was $P(\epsilon)\approx0.1686$.
 \end{figure}
 
 
-\begin{figure}[ht]
+\begin{figure}[!ht]
 \begin{minipage}[b]{0.5\linewidth}
 \centering
 	\begin{tabular}{ccc|c|c|c}
@@ -224,12 +231,13 @@ The result for CASE 2 was $P(\epsilon)\approx0.1686$.
 
 
 \clearpage
+
 \subsection{NN and 5NN}
 
-Training data was used as original error boundaries. The test data was generated as another set data with the same params as the original class training data, but with a different random seed.
+For the NN and 5NN classifiers, the classifiers were developed from one set of data, and the classifier was tested with a new set of data, distributed similarly to the original data. This data set was of the same size as the training data set.
 
 \subsubsection{NN}
-\begin{figure}[ht]
+\begin{figure}[!ht]
 \begin{minipage}[b]{0.5\linewidth}
 \centering
 	\begin{tabular}{ccc|c|c}
@@ -259,7 +267,7 @@ Training data was used as original error boundaries. The test data was generated
 \end{figure}
 
 
-\begin{figure}[ht]
+\begin{figure}[!ht]
 \begin{minipage}[b]{0.5\linewidth}
 \centering
 	\begin{tabular}{ccc|c|c|c}
@@ -291,9 +299,8 @@ Training data was used as original error boundaries. The test data was generated
 \end{figure}
 
 
-
 \subsubsection{5NN}
-\begin{figure}[ht]
+\begin{figure}[!ht]
 \begin{minipage}[b]{0.5\linewidth}
 \centering
 	\begin{tabular}{ccc|c|c}
@@ -323,7 +330,7 @@ Training data was used as original error boundaries. The test data was generated
 \end{figure}
 
 	
-\begin{figure}[ht]
+\begin{figure}[!ht]
 \begin{minipage}[b]{0.5\linewidth}
 \centering
 	\begin{tabular}{ccc|c|c|c}
@@ -354,7 +361,5 @@ Training data was used as original error boundaries. The test data was generated
 \caption{5 Nearest Neighbor performance on C, D and E}
 \end{figure}
  
-
-
  
 \clearpage
