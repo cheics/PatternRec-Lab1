@@ -23,7 +23,7 @@ In the above equation, $\Lambda$ contains the eigen values of the covariance mat
 \end{eqnarray}
 
 
-The decision boundary is therefore calculated in the ttwo- and three- class cases as,
+The decision boundary is therefore calculated in the two- and three- class cases as,
 
 \begin{eqnarray}
 \label{eqn:boundary-GED}
@@ -55,8 +55,6 @@ This implementation of the GED classifier and method for creating the decision b
 The nearest neighbor classifier uses MatLab implementation of $knnclassify$. A nearest neighbor classifier will test a point and compare it's distance to all other known classified points. The test point will belong to the class which contains a point with the least ecludian distance to the test point.
 
 The classification boundary is constructed by evaluating many test points on a grid, using the generated data as training data. Due to the nature of nearest neigbor, all training data will be classified correctly; each classified point is it's own nearest neighor.
-
-
 
 \subsubsection{Five Nearest Neighbor}
 
