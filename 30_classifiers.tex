@@ -56,19 +56,6 @@ The nearest neighbor classifier uses MatLab implementation of $knnclassify$. A n
 
 The classification boundary is constructed by evaluating many test points on a grid, using the generated data as training data. Due to the nature of nearest neigbor, all training data will be classified correctly; each classified point is it's own nearest neighor.
 
-\begin{figure}[ht]
-\centering
-	\subfigure[Clusters A, B with NN classification]{
-	\includegraphics[width=0.45\linewidth]{fig3a-AB_NN}
-	}
-	\subfigure[Clusters C, D, E with NN classification]{
-	\includegraphics[width=0.45\linewidth]{fig3b-CDE_NN}
-	}
-	\label{fig:nn_boundary}
-	\caption{Nearest Neighbor boundaries}
-\end{figure}
-
-
 \subsubsection{Five Nearest Neighbor}
 
 The nearest neighbor classifier uses MatLab implementation of $knnclassify$. A nearest neighbor classifier will test a point and compare it's distance to all other known classified points. The test point will belong to the class which contains a point with the least ecludian distance to the test point.
