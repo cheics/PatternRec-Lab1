@@ -209,7 +209,8 @@ The result for CASE 2 was $P(\epsilon)\approx0.1686$.
 
 \clearpage
 \subsection{NN and 5NN}
-Used 50\% training data
+
+Training data was used as original error boundaries. The test data was generated as another set data with the same params as the original class training data, but with a different random seed.
 
 \subsubsection{NN}
 \begin{figure}[ht]
@@ -219,21 +220,21 @@ Used 50\% training data
 	 & &\multicolumn{2}{c}{Predicted} &\\
 	  & & \bf{A} &  \bf{B} & total \\
 	 \cline{3-5}
-	 \multirow{2}{*}{\begin{sideways}Actual\end{sideways}} & \bf{A'}& 101 & 4 & 105 \\
+	 \multirow{2}{*}{\begin{sideways}Actual\end{sideways}} & \bf{A'}& 83 & 17 & 100 \\
 	 \cline{3-5}
-	 & \bf{B'}& 11 & 85 & 96 \\
+	 & \bf{B'}& 21 & 179 & 200 \\
 	  \cline{3-5}
-	 &total&112&89&\\
+	 &total&104&196&\\
 	\end{tabular}
 \end{minipage}
 \hspace{0.5cm}
 \begin{minipage}[b]{0.5\linewidth}
 	\begin{tabular}{r|c}
 	\hline
-	Correct& 186\\
-	Total& 201\\
+	Correct& 279\\
+	Total& 400\\
 	\hline
-	\% Correct& 92.5\%\\
+	\% Correct& 69.8\%\\
 	\hline
 	\end{tabular}
 \end{minipage}
@@ -249,23 +250,23 @@ Used 50\% training data
 	 & &\multicolumn{3}{c}{Predicted} &\\
 	  & & \bf{C} &  \bf{D} & \bf{E} & total \\
 	 \cline{3-5}
-	 \multirow{3}{*}{\begin{sideways}Actual\end{sideways}} & \bf{C'}& 33 & 3 & 14 & 50\\
+	 \multirow{3}{*}{\begin{sideways}Actual\end{sideways}} & \bf{C'}& 63 & 2 & 35 & 100\\
 	 \cline{3-6}
-	 & \bf{D'}& 2 & 88 & 10 & 100\\
+	 & \bf{D'}& 3 & 160 & 37 & 200\\
 	  \cline{3-6}
-	 & \bf{E'}& 9 & 16 & 51 &  76\\
+	 & \bf{E'}& 20 & 28 & 102 &  150\\
 	  \cline{3-6}
-	 &total&44&117&75\\
+	 &total&86&190&141\\
 	\end{tabular}
 \end{minipage}
 \hspace{0.5cm}
 \begin{minipage}[b]{0.5\linewidth}
 	\begin{tabular}{r|c}
 	\hline
-	Correct& 172\\
-	Total& 226\\
+	Correct& 325\\
+	Total& 450 \\
 	\hline
-	\% Correct& 76.1\%\\
+	\% Correct& 72.2\%\\
 	\hline
 	\end{tabular}
 \end{minipage}
@@ -283,29 +284,27 @@ Used 50\% training data
 	 & &\multicolumn{2}{c}{Predicted} &\\
 	  & & \bf{A} &  \bf{B} & total \\
 	 \cline{3-5}
-	 \multirow{2}{*}{\begin{sideways}Actual\end{sideways}} & \bf{A'}& 101 & 4 & 105 \\
+	 \multirow{2}{*}{\begin{sideways}Actual\end{sideways}} & \bf{A'}& 94 & 6 & 100 \\
 	 \cline{3-5}
-	 & \bf{B'}& 11 & 85 & 96 \\
+	 & \bf{B'}& 34 & 166 & 200 \\
 	  \cline{3-5}
-	 &total&1&1&1\\
+	 &total&128&172\\
 	\end{tabular}
 \end{minipage}
 \hspace{0.5cm}
 \begin{minipage}[b]{0.5\linewidth}
 	\begin{tabular}{r|c}
 	\hline
-	Correct& 186\\
-	Total& 201\\
+	Correct& 260\\
+	Total& 300\\
 	\hline
-	\% Correct& 92.5\%\\
+	\% Correct& 86.7\%\\
 	\hline
 	\end{tabular}
 \end{minipage}
 \vspace{1mm}
 \caption{5 Nearest Neighbor performance on A and B}
 \end{figure}
-
-Strangely the same...
 
 	
 \begin{figure}[ht]
@@ -315,23 +314,23 @@ Strangely the same...
 	 & &\multicolumn{3}{c}{Predicted} &\\
 	  & & \bf{C} &  \bf{D} & \bf{E} & total \\
 	 \cline{3-5}
-	 \multirow{3}{*}{\begin{sideways}Actual\end{sideways}} & \bf{C'}& 41 & 3 & 6 & 50\\
+	 \multirow{3}{*}{\begin{sideways}Actual\end{sideways}} & \bf{C'}& 75 & 0 & 25 & 100\\
 	 \cline{3-6}
-	 & \bf{D'}& 3 & 92 & 5 & 100\\
+	 & \bf{D'}& 1 & 181 & 18 & 200\\
 	  \cline{3-6}
-	 & \bf{E'}& 14 & 13 & 49 &  76\\
+	 & \bf{E'}& 14 & 24 & 112 &  150\\
 	  \cline{3-6}
-	 &total&58&108&60\\
+	 &total&90&205&155\\
 	\end{tabular}
 \end{minipage}
 \hspace{0.5cm}
 \begin{minipage}[b]{0.5\linewidth}
 	\begin{tabular}{r|c}
 	\hline
-	Correct& 182\\
-	Total& 226\\
+	Correct& 368\\
+	Total& 450\\
 	\hline
-	\% Correct& 80.5\%\\
+	\% Correct& 81.8\%\\
 	\hline
 	\end{tabular}
 \end{minipage}
