@@ -52,6 +52,13 @@ This implementation of the GED classifier and method for creating the decision b
 
 \subsubsection{Maximum A Posteriori}
 
+The MAP classifier was being used on known distributions, namely normal distributions. The likelyhood $p(\underbar{x} \mid Y)$; where $Y$ is a class among A,B,C,D,E; was calculated for each class at each point in the grid. The classifier then skewed the distributions according to the prior probabilities. Pairwise comparisons were made among the 3 class case in order to determine the class.
+
+\begin{eqnarray}
+\label{eqn:pointClass-MAP}
+ max \left( p(\underbar{x} \mid A)p(A), \hspace{3mm} p(\underbar{x} \mid B)p(B) , \hspace{3mm} p(\underbar{x} \mid C)p(C) \right) 
+\end{eqnarray}
+
 \subsubsection{Nearest Neighbor}
 
 The nearest neighbor classifier uses MATLAB implementation of $knnclassify$. A nearest neighbor classifier will test a point and compare its distance to all other known classified points. The test point will belong to the class which contains a point with the least Euclidian distance to the test point.
@@ -93,7 +100,7 @@ In the Case 2 scenario (Figure~\ref{fig:med_ged_map_classifier_case2}), the MED 
 	\label{fig:med_ged_map_classifier_case2}
 \end{figure}
 
-Next, the NN and 5NN classification boundaries were plotted together for both the Case 1 and Case 2 data sets, along with unit variance contours for each class, to allow for comparison. The decision boundaries for Case 1 (Figure~\ref{fig:nn_boundary_case1}) are fairly similar for both methods, with the decision boundaries being shown as jagged lines separating the data. The key difference in the two methods is that the 5NN classification method does not result in classification boundaries around outliers of the two data sets.
+Next, the NN and 5NN classification boundaries were plotted together for both the Case 1 and Case 2 data sets, along with unit variance contours for each class, to allow for comparison. The decision boundaries for Case 1, Figure~\ref{fig:nn_boundary_case1}, are fairly similar for both methods, with the decision boundaries being shown as jagged lines separating the data. The key difference in the two methods is that the 5NN classification method does not result in classification boundaries around outliers of the two data sets.
 
 \begin{figure}[ht]
 \centering
@@ -108,7 +115,7 @@ Next, the NN and 5NN classification boundaries were plotted together for both th
 	\label{fig:nn_boundary_case1}
 \end{figure}
 
-For the Case 2 scenario (Figure~\ref{fig:nn_boundary_case2}), performance of the two methods was similar. Again, the sensitivity of the NN method to outliers is seen to result to decision boundaries encircling outliers. The 5NN classifier is not as prone to these outliers, resulting in a more intuitive decision boundary between the three classes of data.
+For the Case 2 scenario, Figure~\ref{fig:nn_boundary_case2}, performance of the two methods was similar. Again, the sensitivity of the NN method to outliers is seen to result to decision boundaries encircling outliers. The 5NN classifier is not as prone to these outliers, resulting in a more intuitive decision boundary between the three classes of data.
 
 \begin{figure}[ht]
 \centering
