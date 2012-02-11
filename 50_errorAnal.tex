@@ -1,5 +1,5 @@
 \section{Error Analysis}
-To find the experimental error rate $P(\epsilon)$ for CASE 1, a discretized form of the following equation was used.
+To find the experimental error rate $P(\epsilon)$ for Case 1, a discretized form of the following equation was used.
 \begin{eqnarray}
 \label{eqn:2-class_cont_PofE}
 P(\epsilon)=\int_{R_A}P(\underbar {x}|B)P(B)d\underbar {x} +
@@ -15,7 +15,7 @@ P(\epsilon)\approx\sum_{i,j\ in\ R_A}P(\underbar {x}|B)_{i,j}P(B)wh +
 
 where $w$ and $l$ are the width and height of the discretized points. Although the equation describes summing values over an infinite number of points, a finite set of points had to be selected to feasibly perform the calculation. This introduces some negligible error. The same number of points used to calculate the classification data was used to calculate $P(\epsilon)$. The result was $P(\epsilon)\approx0.06281$.
 
-To find $P(\epsilon)$ for CASE 2, the same method was used as in CASE 1 except that the equation for $P(\epsilon)$ had to be modified for 3 classes.
+To find $P(\epsilon)$ for Case 2, the same method was used as in Case 1 except that the equation for $P(\epsilon)$ had to be modified for three classes.
 \begin{eqnarray}
 \label{eqn:3-class_cont_PofE}
 P(\epsilon)& = \int_{R_C}[P(\underbar{x}|D)P(D)+P(\underbar{x}|E)P(E)]d\underbar{x} \\
@@ -31,7 +31,7 @@ P(\epsilon)&\approx \sum_{i,j\ in\ R_C}[P(\underbar{x}|D)_{i,j}P(D)+P(\underbar{
            & +      \sum_{i,j\ in\ R_E}[P(\underbar{x}|C)_{i,j}P(C)+P(\underbar{x}|D)_{i,j}P(D)]wh \nonumber
 \end{eqnarray}
 
-The result for CASE 2 was $P(\epsilon)\approx0.1686$.
+The result for Case 2 was found to be $P(\epsilon)\approx0.1686$.
  
 \subsection{Confusion matrices for GED, MED and MAP}
 
@@ -234,7 +234,7 @@ For the GED, MED and MAP classifiers, the same data used to generate the classif
 
 \subsection{NN and 5NN}
 
-For the NN and 5NN classifiers, the classifiers were developed from one set of data, and the classifier was tested with a new set of data, distributed similarly to the original data. This data set was of the same size as the training data set.
+For the NN and 5NN classifiers, the classifiers were developed from a set of training data, and the classifier was tested with a new set of data, distributed with the same underlying statistics as the training data. This data set was of the same size as the training data set.
 
 \subsubsection{NN}
 \begin{figure}[!ht]

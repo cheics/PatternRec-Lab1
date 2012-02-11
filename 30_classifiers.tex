@@ -7,7 +7,7 @@
 The MED classifier uses the means of the classes as prototypes for the classifier. The test point to each class mean; the minimum euclidian distance between the test point and one of the various class means designates the class.
 
 \subsubsection{General Euclidean Distance}
-The GED classifier is implemented in a similar manner as the MED classifier. However, in the case of GED a whitening transform is applied to the samples to transform them onto a space where features are both uncorrelated, and have unit-variances. This is accomplished using the weighting matrix W. The distance between two points in the transformed space is calculated as,
+The GED classifier is implemented in a similar manner as the MED classifier. However, in the case of GED a whitening transform is applied to the samples to transform them onto a space where features are both uncorrelated, and have unit-variances. The distance between two points in the transformed space is calculated as,
 
 
 \begin{eqnarray}
@@ -17,11 +17,11 @@ The GED classifier is implemented in a similar manner as the MED classifier. How
 
 
 
-In the above equation, $\Lambda$ contains the eigen values of the covariance matrix $\Sigma$ as elements, and $\Phi$ contains the eigenvectors of $\Sigma$. The simplified distance function is included in \ref{eqn:GED}.
+The simplified distance function is included in \ref{eqn:GED}.
 
 \begin{eqnarray}
 \label{eqn:GED}
-{d}_{G}(x,z) = {\left [ (x-z)^{T}\Phi\Lambda^{-1/2}\Phi^{T}(x-z) \right ]}^{1/2}
+{d}_{G}(\underbar{x},\underbar{z}) = {\left [ (\underbar{x}-\underbar{z})^{T}\Phi\Lambda^{-1/2}\Phi^{T}(\underbar{x}-\underbar{z}) \right ]}^{1/2}
 \end{eqnarray}
 
 
@@ -29,22 +29,22 @@ The decision boundary is therefore calculated in the two- and three- class cases
 
 \begin{eqnarray}
 \label{eqn:boundary-GED}
-& d_{E} (x,z_{1}) = d_{E} (x,z_{2}) \\
-& \left [ (x-{z}_{1})^{T}\Phi\Lambda^{-1/2}\Phi^{T}(x-z_{1}) \right ]^{1/2} \\
-= & \left [ (x-z_{2})^{T}\Phi\Lambda^{-1/2}\Phi^{T}(x-z_{2}) \right ]^{1/2}  \nonumber \\
-&\left [ (x-{z}_{1})^{T}\Phi\Lambda^{-1/2}\Phi^{T}(x-z_{1}) \right ]^{1/2} \\
-= &\left [ (x-z_{2})^{T}\Phi\Lambda^{-1/2}\Phi^{T}(x-z_{2}) \right ]^{1/2}  \nonumber \\
-= &\left [ (x-z_{3})^{T}\Phi\Lambda^{-1/2}\Phi^{T}(x-z_{3}) \right ]^{1/2}  \nonumber
+& d_{E} (\underbar{x},\underbar{z}_{1}) = d_{E} (\underbar{x},\underbar{z}_{2}) \\
+& \left [ (\underbar{x}-\underbar{z}_{1})^{T}\Phi\Lambda^{-1/2}\Phi^{T}(\underbar{x}-\underbar{z}_{1}) \right ]^{1/2} \\
+= & \left [ (\underbar{x}-\underbar{z}_{2})^{T}\Phi\Lambda^{-1/2}\Phi^{T}(\underbar{x}-\underbar{z}_{2}) \right ]^{1/2}  \nonumber \\
+&\left [ (\underbar{x}-\underbar{z}_{1})^{T}\Phi\Lambda^{-1/2}\Phi^{T}(\underbar{x}-\underbar{z}_{1}) \right ]^{1/2} \\
+= &\left [ (\underbar{x}-\underbar{z}_{2})^{T}\Phi\Lambda^{-1/2}\Phi^{T}(\underbar{x}-\underbar{z}_{2}) \right ]^{1/2}  \nonumber \\
+= &\left [ (\underbar{x}-\underbar{z}_{3})^{T}\Phi\Lambda^{-1/2}\Phi^{T}(\underbar{x}-\underbar{z}_{3}) \right ]^{1/2}  \nonumber
 \end{eqnarray}
 
 
 
-In the case of the MatLab implementation, all points on the grid are classified based on identifying the minimum distance between the point and the mean of each class in the transformed space. This allows for a simple contour to be plotted showing the decision boundary between each class. This is shown below for both the two- and three- class case,
+In the case of the MATLAB implementation, all points on the grid are classified based on identifying the minimum distance between the point and the mean of each class in the transformed space. This is shown below for both the two- and three- class case,
 
 \begin{eqnarray}
 \label{eqn:pointClass-GED}
-min(d_{E} (x,z_{1}), d_{E} (x,z_{2})) \\
-min(d_{E} (x,z_{1}), d_{E} (x,z_{2}), d_{E} (x,z_{3}))
+min(d_{E} (\underbar{x},\underbar{z}_{1}), d_{E} (\underbar{x},\underbar{z}_{2})) \\
+min(d_{E} (\underbar{x},\underbar{z}_{1}), d_{E} (\underbar{x},\underbar{z}_{2}), d_{E} (\underbar{x},\underbar{z}_{3}))
 \end{eqnarray}
 
 
