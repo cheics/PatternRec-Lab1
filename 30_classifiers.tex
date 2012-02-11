@@ -4,7 +4,7 @@
 
 \subsubsection{Mean Euclidean Distance}
 
-The MED classifier uses the means of the classes as prototypes for the classifier. The test point to each class mean; the minimum euclidian distance between the test point and one of the various class means designates the class.
+The MED classifier uses the means of the classes as prototypes for the classifier. The classifer compares a test point to each class mean; the minimum euclidian distance between the test point and one of the various class means designates the class.
 
 \subsubsection{General Euclidean Distance}
 The GED classifier is implemented in a similar manner as the MED classifier. However, in the case of GED a whitening transform is applied to the samples to transform them onto a space where features are both uncorrelated, and have unit-variances. The distance between two points in the transformed space is calculated as,
@@ -52,7 +52,7 @@ This implementation of the GED classifier and method for creating the decision b
 
 \subsubsection{Maximum A Posteriori}
 
-The MAP classifier skews the GED classifier according to the prior probabilities of the various classes.
+The MAP classifier skews the GED classifier according to the prior probabilities of the various classes. The MAP classifier will reduce error if the future distibution of the data, based on the probability of belonging to a class, is similar to the prior probability.
 
 \begin{eqnarray}
 max( \hspace{3mm} p(C)p(x\mid C), \hspace{3mm} p(D)p(x\mid D), \hspace{3mm} p(E)p(x\mid E) ) 
