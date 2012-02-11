@@ -1,4 +1,5 @@
 \section{Error Analysis}
+\subsection{Experimental error rate}
 To find the experimental error rate $P(\epsilon)$ for Case 1, a discretized form of the following equation was used.
 \begin{eqnarray}
 \label{eqn:2-class_cont_PofE}
@@ -35,7 +36,7 @@ The result for Case 2 was found to be $P(\epsilon)\approx0.1686$.
 
 Case 1 was found to have a much lower experimental error rate than Case 2. This was expected because Case 2 had one more class than Case 1 and because the unit standard deviation contours of the clusters of Case 2 were much closer together than the contours of the clusers of Case 1.
  
-\subsection{Confusion matrices for GED, MED and MAP}
+\subsection{Confusion matrices}
 
 A confusion matrix shows the performance of a classifier on a set of data. It compares the true values of the data against the predicted classifications by the classifier, and attempts to quantify the types of errors being made.
 
@@ -231,11 +232,6 @@ For the GED, MED and MAP classifiers, the same data used to generate the classif
 \caption{MAP performance on C, D and E}
 \end{figure}
 
-
-\clearpage
-
-\subsection{NN and 5NN}
-
 For the NN and 5NN classifiers, the classifiers were developed from a set of training data, and the classifier was tested with a new set of data, distributed with the same underlying statistics as the training data. This data set was of the same size as the training data set.
 
 \subsubsection{NN}
@@ -362,6 +358,7 @@ For the NN and 5NN classifiers, the classifiers were developed from a set of tra
 \vspace{1mm}
 \caption{5 Nearest Neighbour performance on C, D and E}
 \end{figure}
- 
+
+The confusion matrices of Case 2 show that points that actually belong to cluster E are the least likely to be classified correctly. Similar to why the experimental error rate for Case 2 was lower than Case 1, the greater difficulty in correctly classifying points of cluster E is because of how close cluster E is to the other two clusters. Cluster E is partially between clusters C and D. The GED and MAP classifier boundaries show this close proximity very well.
  
 \clearpage
