@@ -13,7 +13,7 @@ P(\epsilon)\approx\sum_{i,j\ in\ R_A}P(\underbar {x}|B)_{i,j}P(B)wh +
                   \sum_{i.j\ in\ R_B}P(\underbar {x}|A)_{i,j}P(A)wh
 \end{eqnarray}
 
-where $w$ and $l$ are the width and height of the discretized points. Although the equation describes summing values over an infinite number of points, a finite set of points had to be selected to feasibly perform the calculation. This introduces some negligible error. The same number of points used to calculate the classification data was used to calculate $P(\epsilon)$. The result was $P(\epsilon)\approx0.06281$.
+where $w$ and $l$ are the width and height of the discretized points. The MAP classification boundary that were found previously were used for determining $R_A$ and $R_B$. Although the equation describes summing values over an infinite number of points, a finite set of points had to be selected to feasibly perform the calculation. This introduces some negligible error. The same number of points used to calculate the classification data was used to calculate $P(\epsilon)$. The result was $P(\epsilon)\approx0.06281$.
 
 To find $P(\epsilon)$ for Case 2, the same method was used as in Case 1 except that the equation for $P(\epsilon)$ had to be modified for three classes.
 \begin{eqnarray}
@@ -23,7 +23,7 @@ P(\epsilon)& = \int_{R_C}[P(\underbar{x}|D)P(D)+P(\underbar{x}|E)P(E)]d\underbar
            & + \int_{R_E}[P(\underbar{x}|C)P(C)+P(\underbar{x}|D)P(D)]d\underbar{x}\nonumber
 \end{eqnarray}
 
-The discretized form of this equation becomes:
+The discretized form of this equation becomes
 \begin{eqnarray}
 \label{eqn:3-class_disc_PofE}
 P(\epsilon)&\approx \sum_{i,j\ in\ R_C}[P(\underbar{x}|D)_{i,j}P(D)+P(\underbar{x}|E)_{i,j}P(E)]wh \\
@@ -32,6 +32,8 @@ P(\epsilon)&\approx \sum_{i,j\ in\ R_C}[P(\underbar{x}|D)_{i,j}P(D)+P(\underbar{
 \end{eqnarray}
 
 The result for Case 2 was found to be $P(\epsilon)\approx0.1686$.
+
+Case 1 was found to have a much lower experimental error rate than Case 2. This was expected because Case 2 had one more class than Case 1 and because the unit standard deviation contours of the clusters of Case 2 were much closer together than the contours of the clusers of Case 1.
  
 \subsection{Confusion matrices for GED, MED and MAP}
 

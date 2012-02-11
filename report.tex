@@ -17,7 +17,7 @@
 \title{Lab 1}
 \subtitle{Clusters and Classification Boundaries}
 
-\coursecode{SYDE 472}
+\coursecode{SYDE 372}
 \department{Systems Design Engineering}
 
 \author{Colin Heics, 20240543}
@@ -52,7 +52,9 @@
 
 
 \subsection{Results}
-All classification methods were applied in each of Case 1 and Case 2. To aid in analysis, MED, GED, and MAP classifier boundaries are all plotted together in one figure, along with data clusters and unit standard deviation contours. In the Case 1 scenario (Figure~\ref{fig:med_ged_map_classifier_case1}), the GED and MAP classification boundaries, shown as magenta and blue lines respectively, lie on top of each other with the magenta line being obscured. This is because the MAP classifier is reduced to GED in this case, as the a priori probabilities for each class are equal. The classification boundaries are essentially two very slightly curved, but relatively straight, lines separating the two data clusters. The MED classification boundary is represented by the steeper straight cyan line. This makes sense intuitively, as the classification boundary represents the perpendicular bisector of the mean in each cluster. In the MED case only the mean, and not the covariance information for the two classes, is considered.
+All classification methods were applied in each of Case 1 and Case 2. To apply the methods, the space of each case was divided into a 2-D array of discrete points whose range matched the range of the respective cluster data and whose resolution was equal to 0.05 along both feature axes. For each method and case, each point in the 2-D array was classified. MATLAB's $contour()$ was used with each 2-D array to produce the classifier boundaries.
+
+To aid in analysis, MED, GED, and MAP classifier boundaries are all plotted together in one figure, along with data clusters and unit standard deviation contours. In the Case 1 scenario (Figure~\ref{fig:med_ged_map_classifier_case1}), the GED and MAP classification boundaries, shown as magenta and blue lines respectively, lie on top of each other with the magenta line being obscured. This is because the MAP classifier is reduced to GED in this case, as the a priori probabilities for each class are equal. The classification boundaries are essentially two very slightly curved, but relatively straight, lines separating the two data clusters. The MED classification boundary is represented by the steeper straight cyan line. This makes sense intuitively, as the classification boundary represents the perpendicular bisector of the mean in each cluster. In the MED case only the mean, and not the covariance information for the two classes, is considered.
 
 \begin{figure}[ht]
 \centering
@@ -109,7 +111,7 @@ For the Case 2 scenario (Figure~\ref{fig:nn_boundary_case2}), performance of the
 \include{50_errorAnal}
 
 \section{Conclusions}
-Implementation of five classifiers (MED, GED, MAP, NN, and 5NN) in MatLab was used to analyze the performance of each classifier. First, each method was implemented and used to classify a two-class and three-class data set. The classifiers were used to determine decision boundaries in each case, resulting in some initial observations about model performance. Overall, MED performed poorly, with GED and MAP classifiers performing significantly better. It was also seen that the 5NN classifier outperformed the NN classifier in rejecting statistical outliers in the data.
+Implementation of five classifiers (MED, GED, MAP, NN, and 5NN) in MATLAB was used to analyze the performance of each classifier. First, each method was implemented and used to classify a two-class and three-class data set. The classifiers were used to determine decision boundaries in each case, resulting in some initial observations about model performance. Overall, MED performed poorly, with GED and MAP classifiers performing significantly better. It was also seen that the 5NN classifier outperformed the NN classifier in rejecting statistical outliers in the data.
 
 As noted in the earlier error analysis, MAP outperformed the MED, GED, NN, and 5NN classifiers in the scenario of Case 1. This is because MAP inherently attempts to minimize the probability of error, resulting in it outperforming other classifiers in terms of probability of error. MED does not consider the probability of error, or the the covariance of the data, and therefore performs relatively poorly. GED performs significantly better than MED for Case 1, and almost performs at the level of the MAP classifier. This is because GED considers the covariance of each class of data, though unlike MAP it does not consider the probability of error. The NN and 5NN classifiers are markedly outperformed by the other techniques, a result of them poorly classifying the new set of test data.
 

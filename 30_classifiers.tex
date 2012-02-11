@@ -61,14 +61,14 @@ max( \hspace{3mm} p(C)p(x\mid C), \hspace{3mm} p(D)p(x\mid D), \hspace{3mm} p(E)
 
 \subsubsection{Nearest Neighbor}
 
-The nearest neighbor classifier uses MatLab implementation of $knnclassify$. A nearest neighbor classifier will test a point and compare it's distance to all other known classified points. The test point will belong to the class which contains a point with the least ecludian distance to the test point.
+The nearest neighbor classifier uses MATLAB implementation of $knnclassify$. A nearest neighbor classifier will test a point and compare it's distance to all other known classified points. The test point will belong to the class which contains a point with the least ecludian distance to the test point.
 
 The classification boundary is constructed by evaluating many test points on a grid, using the generated data as training data. Due to the nature of nearest neigbor, all training data will be classified correctly; each classified point is it's own nearest neighor.
 
 \subsubsection{Five Nearest Neighbor}
 
-The 5 nearest neighbor classifier uses MatLab implementation of $knnclassify$. A nearest neighbor classifier will test a point and compare it's distance to all other known classified points. The 5 nearest classified points are determined, and the class of each of the points is determined. The class with the majority of classpoints in the 5 nearest neighbors is designated the class for the test point.
+The 5 nearest neighbor classifier uses MATLAB implementation of $knnclassify$. A nearest neighbor classifier will test a point and compare it's distance to all other known classified points. The 5 nearest classified points are determined, and the class of each of the points is determined. The class with the majority of classpoints in the 5 nearest neighbors is designated the class for the test point.
 
-Note that the method of selecting the 5 nearest sample points from each class and selecting the class the lowest sample mean was not used, as there exist many variations of the nearest neighbor method, and the Matlab default is likely the default due to it's accuracy.
+Note that the method of selecting the 5 nearest sample points from each class and selecting the class the lowest sample mean was not used, as there exist many variations of the nearest neighbor method, and the MATLAB default is likely the default due to it's accuracy.
 
 The classification boundary is constructed by evaluating many test points on a grid, using the generated data as training data. Unlike nearest neigbor, 5 nearest neighbor will not classify all training data correctly; the use of 5 nearest neighbors means that not all points will have 2 other nearest neighbors that are of the same class.
